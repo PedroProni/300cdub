@@ -1,10 +1,21 @@
 VISÃO GERAL
 -----------
-O sistema foi desenvolvido em NestJS, com MongoDB como banco de dados e aplicação de conceitos de DDD (Domain-Driven Design).
+O sistema 300cdub-API foi desenvolvido em NestJS, com MongoDB como banco de dados e aplicação de conceitos de DDD (Domain-Driven Design). A API oferece funcionalidades completas para gerenciamento de produtos, incluindo operações CRUD com imagens associadas.
 
+ARQUITETURA
+-----------
+- Clean Architecture com Domain-Driven Design (DDD)
+- Separação em camadas: Domain, Application, Infrastructure e Presentation
+- Padrão Repository para abstração de dados
+- Uso de DTOs para validação de entrada
+- Mappers para conversão entre camadas
 
 TECNOLOGIAS UTILIZADAS
 -----------------------
 - Framework: NestJS
-- Banco de Dados: MongoDB
-- Documentação: Swagger
+- Banco de Dados: MongoDB com Mongoose
+- Documentação: Swagger/OpenAPI
+- Validação: class-validator e class-transformer
+- Autenticação: Token-based authentication
+- Segurança: Helmet, CORS, CSRF protection
+- Health Checks: @nestjs/terminus

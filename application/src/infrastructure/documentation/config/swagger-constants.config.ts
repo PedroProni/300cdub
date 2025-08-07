@@ -9,6 +9,6 @@ if (fs.existsSync(description_path)) {
 }
 
 export const SWAGGER_API_ROOT = 'api';
-export const SWAGGER_API_NAME = 'Template - API';
+export const SWAGGER_API_NAME = '300cdub - API';
 export const SWAGGER_API_DESCRIPTION = description;
 export const SWAGGER_API_CURRENT_VERSION = '1.0';

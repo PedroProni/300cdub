@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApplicationProductMapper } from '@application/mappers/product.mapper';
 import { CreateProductUseCase } from '@application/use-cases/product/create-product.use-case';
 import { UpdateProductUseCase } from '@application/use-cases/product/update-product.use-case';
@@ -18,6 +18,7 @@ export class ProductController {
   ) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create a new product' })
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() dto: CreateProductDto) {
     const command = ApplicationProductMapper.toCreateCommand(dto);
@@ -25,12 +26,14 @@ export class ProductController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Find products' })
   @HttpCode(HttpStatus.OK)
   async find(@Query('page') page: number, @Query('limit') limit: number, @Query('id') id?: string) {
     return await this.findProductUseCase.execute(page, limit, id);
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update an existing product' })
   @HttpCode(HttpStatus.OK)
   async update(@Param('id') id: string, @Body() dto: UpdateProductDto) {
     const command = ApplicationProductMapper.toUpdateCommand(id, dto);
@@ -38,6 +41,7 @@ export class ProductController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete an existing product' })
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id') id: string) {
     return await this.deleteProductUseCase.execute(id);
