@@ -1,0 +1,11 @@
+services:
+  300cdub-api: # Change to application name
+    build:
+      context: ./application
+    container_name: 300cdub-api # Change to application name
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./application/.env
+    command: node dist/main.js
+    restart: unless-stopped
