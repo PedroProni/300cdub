@@ -8,7 +8,7 @@ import { User, Car, Star } from 'lucide-vue-next';
       <div class="main-name-div">
         <p class="main-name">Paulo Proni</p>
       </div>
-      <h1 class="main-title">300cdub</h1>
+      <h1 class="main-title">300c.dub</h1>
       <p class="main-subtitle">Vivendo na fast lane: potência, velocidade e liberdade sobre rodas!</p>
       <div class="main-icons">
         <div>
