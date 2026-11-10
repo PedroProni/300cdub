@@ -15,7 +15,7 @@ const id = useId();
       v-model="model"
       rows="5"
       :aria-invalid="props.error ? true : undefined"
-      class="rounded-md border border-edge bg-ink px-3 py-2 text-base text-steel"
+      class="rounded-sm border border-edge bg-ink px-3 py-2 text-base text-steel"
       :class="props.error ? 'border-danger' : ''"
     />
     <p v-if="props.error || props.hint" class="text-xs" :class="props.error ? 'text-danger' : 'text-muted'">{{ props.error || props.hint }}</p>

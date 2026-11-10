@@ -10,7 +10,7 @@ const { t } = useI18n();
 <template>
   <span
     :key="props.status"
-    class="badge-pop inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
+    class="badge-pop micro-label inline-flex items-center rounded-sm border bg-ink/80 px-2 py-0.5 text-[10px] backdrop-blur-sm"
     :class="STOCK_BADGE_CLASSES[props.status]"
     data-testid="stock-badge"
   >

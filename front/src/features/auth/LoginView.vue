@@ -40,11 +40,11 @@ async function submit(): Promise<void> {
 <template>
   <div class="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-6 px-4 py-10">
     <div class="flex items-center justify-between">
-      <h1 class="font-display-tight chrome-text text-3xl font-bold">{{ t("brand.name") }}</h1>
+      <h1 class="font-display text-6xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("brand.name") }}</h1>
       <LanguageSwitcher />
     </div>
-    <form class="metal-card flex flex-col gap-4 rounded-xl p-6" novalidate @submit.prevent="submit">
-      <h2 class="font-display-tight text-lg text-steel">{{ t("auth.login.title") }}</h2>
+    <form class="metal-card flex flex-col gap-4 rounded-sm p-6" novalidate @submit.prevent="submit">
+      <h2 class="micro-label">{{ t("auth.login.title") }}</h2>
       <BaseInput v-model="email" type="email" autocomplete="username" inputmode="email" :label="t('auth.login.email')" required />
       <BaseInput v-model="password" type="password" autocomplete="current-password" :label="t('auth.login.password')" required />
       <p v-if="errorMessage" role="alert" class="rounded border border-danger/50 bg-danger/10 px-3 py-2 text-sm text-danger">{{ errorMessage }}</p>

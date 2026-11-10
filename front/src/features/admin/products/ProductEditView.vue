@@ -90,10 +90,10 @@ async function save(): Promise<void> {
 <template>
   <div class="flex flex-col gap-6">
     <RouterLink :to="{ name: ROUTE_NAMES.adminProducts }" class="text-sm text-muted hover:text-accent">{{ t("admin.products.back") }}</RouterLink>
-    <h1 class="font-display-tight text-2xl font-bold text-steel">{{ editing ? t("admin.products.editTitle") : t("admin.products.newTitle") }}</h1>
+    <h1 class="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ editing ? t("admin.products.editTitle") : t("admin.products.newTitle") }}</h1>
     <SkeletonForm v-if="loading" :fields="5" />
     <template v-else>
-      <form class="metal-card flex flex-col gap-4 rounded-xl p-4 sm:p-6" novalidate @submit.prevent="save">
+      <form class="metal-card flex flex-col gap-4 rounded-sm p-4 sm:p-6" novalidate @submit.prevent="save">
         <BaseInput v-model="form.name" :label="t('admin.products.name')" :error="translated.name" required />
         <BaseTextarea v-model="form.description" :label="t('admin.products.description')" />
         <BaseSelect v-model="form.categoryId" :label="t('admin.products.category')" :options="categoryOptions" />
@@ -119,8 +119,8 @@ async function save(): Promise<void> {
           <BaseButton type="submit" :loading="saving">{{ t("common.save") }}</BaseButton>
         </div>
       </form>
-      <div v-if="product" class="metal-card rounded-xl p-4 sm:p-6"><ImageManager :product="product" @updated="product = $event" /></div>
-      <p v-else class="rounded-md border border-dashed border-edge px-4 py-6 text-center text-sm text-muted">{{ t("admin.images.saveFirst") }}</p>
+      <div v-if="product" class="metal-card rounded-sm p-4 sm:p-6"><ImageManager :product="product" @updated="product = $event" /></div>
+      <p v-else class="rounded-sm border border-dashed border-edge px-4 py-6 text-center text-sm text-muted">{{ t("admin.images.saveFirst") }}</p>
     </template>
   </div>
 </template>

@@ -60,11 +60,11 @@ async function remove(imageId: string): Promise<void> {
 
 <template>
   <section class="flex flex-col gap-3" :aria-label="t('admin.images.title')">
-    <h2 class="font-display-tight text-lg text-steel">{{ t("admin.images.title") }}</h2>
+    <h2 class="font-display text-3xl font-bold uppercase leading-none text-steel">{{ t("admin.images.title") }}</h2>
     <p class="text-xs text-muted">{{ t("admin.images.help") }}</p>
     <ul ref="list" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      <li v-for="image in props.product.images" :key="image.id" class="metal-card flex flex-col gap-2 rounded-lg p-2" data-testid="image-item">
-        <div class="relative aspect-square overflow-hidden rounded-md bg-raised">
+      <li v-for="image in props.product.images" :key="image.id" class="metal-card flex flex-col gap-2 rounded-sm p-2" data-testid="image-item">
+        <div class="relative aspect-square overflow-hidden rounded-sm bg-raised">
           <img :src="image.urls.thumb" alt="" class="size-full object-cover" />
           <span v-if="image.isCover" class="absolute left-1 top-1 rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-black">{{ t("admin.images.cover") }}</span>
         </div>
@@ -98,7 +98,7 @@ async function remove(imageId: string): Promise<void> {
         </div>
       </li>
     </ul>
-    <p v-if="props.product.images.length === 0" class="rounded-md border border-dashed border-edge px-4 py-6 text-center text-sm text-muted">{{ t("admin.images.empty") }}</p>
+    <p v-if="props.product.images.length === 0" class="rounded-sm border border-dashed border-edge px-4 py-6 text-center text-sm text-muted">{{ t("admin.images.empty") }}</p>
     <input ref="input" type="file" class="sr-only" multiple :accept="IMAGE_ACCEPT" :aria-label="t('admin.images.upload')" data-testid="image-input" @change="onFiles" />
     <div>
       <BaseButton variant="secondary" :loading="busy" @click="input?.click()">{{ t("admin.images.upload") }}</BaseButton>

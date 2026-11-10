@@ -31,6 +31,15 @@ describe("ProductView", () => {
     expect(img.attributes("fetchpriority")).toBe("high");
   });
 
+  it("keeps the info column sticky on desktop and shows the gallery counter with several images", async () => {
+    const images = ["a", "b"].map((id) => ({ id, isCover: id === "a", urls: { thumb: `http://i/${id}t`, medium: `http://i/${id}m`, large: `http://i/${id}l` } }));
+    vi.mocked(publicApi.product).mockResolvedValue(makeProduct({ images }));
+    const { wrapper } = mountWithApp(ProductView, { props: { slug: "camiseta-300c" } });
+    await flushPromises();
+    expect(wrapper.get('[data-testid="product-info"]').classes()).toEqual(expect.arrayContaining(["lg:sticky", "lg:self-start"]));
+    expect(wrapper.get('[data-testid="gallery-counter"]').text()).toBe("1 / 2");
+  });
+
   it("renders every image as a snap slide and lazy loads the later ones", async () => {
     const images = ["a", "b", "c"].map((id) => ({ id, isCover: id === "a", urls: { thumb: `http://i/${id}t`, medium: `http://i/${id}m`, large: `http://i/${id}l` } }));
     vi.mocked(publicApi.product).mockResolvedValue(makeProduct({ images }));

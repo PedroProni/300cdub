@@ -44,7 +44,7 @@ async function submit(): Promise<void> {
       role="dialog"
       aria-modal="true"
       aria-labelledby="password-title"
-      class="metal-card flex w-full max-w-md flex-col gap-4 rounded-xl p-6"
+      class="metal-card flex w-full max-w-md flex-col gap-4 rounded-sm p-6"
       novalidate
       @submit.prevent="submit"
     >

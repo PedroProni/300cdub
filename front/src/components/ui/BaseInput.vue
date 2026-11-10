@@ -22,7 +22,7 @@ const id = useId();
       :required="props.required"
       :aria-invalid="props.error ? true : undefined"
       :aria-describedby="props.error || props.hint ? `${id}-note` : undefined"
-      class="min-h-11 rounded-md border border-edge bg-ink px-3 text-base text-steel placeholder:text-muted/60"
+      class="min-h-11 rounded-sm border border-edge bg-ink px-3 text-base text-steel placeholder:text-muted/60"
       :class="props.error ? 'border-danger' : ''"
     />
     <p v-if="props.error || props.hint" :id="`${id}-note`" class="text-xs" :class="props.error ? 'text-danger' : 'text-muted'">{{ props.error || props.hint }}</p>

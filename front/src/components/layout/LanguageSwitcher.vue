@@ -18,8 +18,8 @@ function choose(next: AppLocale): void {
       :key="option"
       type="button"
       :aria-pressed="locale === option"
-      class="min-h-9 min-w-9 rounded px-2 text-xs font-bold uppercase transition-colors"
-      :class="locale === option ? 'bg-accent text-black' : 'text-muted hover:text-steel'"
+      class="micro-label min-h-9 min-w-9 rounded-sm border border-transparent px-2 transition-colors"
+      :class="locale === option ? 'border border-accent/60 bg-accent/10 text-accent' : 'hover:text-steel'"
       @click="choose(option)"
     >
       {{ t(LOCALE_LABEL_KEYS[option]) }}

@@ -46,7 +46,7 @@ async function share(): Promise<void> {
   <div class="flex flex-col gap-4">
     <VariantPicker v-if="hasVariants && !soldOut" v-model="selected" :variants="props.product.variants" />
     <BaseButton block :disabled="!canContinue" data-testid="want-this" @click="continueToContact">{{ soldOut ? t("product.cta.soldOut") : t("product.cta.want") }}</BaseButton>
-    <p v-if="!soldOut && hasVariants && !selectedVariant" class="text-sm text-muted">{{ t("product.cta.chooseSize") }}</p>
+    <p v-if="!soldOut && hasVariants && !selectedVariant" class="micro-label">{{ t("product.cta.chooseSize") }}</p>
     <BaseButton variant="ghost" data-testid="share" @click="share">{{ t("product.share") }}</BaseButton>
   </div>
 </template>

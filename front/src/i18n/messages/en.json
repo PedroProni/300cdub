@@ -31,7 +31,8 @@
   },
   "footer": {
     "tagline": "Living in the fast lane: power, speed and freedom on wheels!",
-    "instagram": "Follow on Instagram"
+    "instagram": "Follow on Instagram",
+    "credits": "Image credits"
   },
   "home": {
     "metaTitle": "300c.dub | Product showroom",
@@ -41,7 +42,22 @@
     "cta": "Browse catalog",
     "featuredTitle": "Featured",
     "featuredEmptyTitle": "New things coming soon",
-    "featuredEmptyDescription": "There are no featured products yet. Take a look at the full catalog."
+    "featuredEmptyDescription": "There are no featured products yet. Take a look at the full catalog.",
+    "ctaSecondary": "See featured",
+    "viewAll": "View all",
+    "viewAllTile": "View the full catalog",
+    "hero": {
+      "line1": "Power",
+      "line2": "Speed",
+      "line3": "Freedom",
+      "pick": "Featured piece"
+    },
+    "marquee": {
+      "lane": "Living in the fast lane",
+      "power": "Power",
+      "speed": "Speed",
+      "freedom": "Freedom"
+    }
   },
   "catalog": {
     "title": "Catalog",

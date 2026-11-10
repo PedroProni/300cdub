@@ -2,18 +2,21 @@
 
 @theme {
   --color-ink: #0a0a0a;
-  --color-panel: #141414;
-  --color-raised: #1f1f1f;
-  --color-edge: #2f2f2f;
+  --color-panel: #111111;
+  --color-raised: #1a1a1a;
+  --color-edge: #2a2a2a;
   --color-steel: #e5e5e5;
   --color-muted: #a3a3a3;
   --color-accent: #17f104;
   --color-accent-hot: #5dff4d;
+  --color-accent-fill: #0eb300;
   --color-danger: #ef4444;
   --color-ok: #17f104;
   --color-warn: #e0a526;
-  --font-display: "Poppins", system-ui, sans-serif;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --header-height: 3.5rem;
 }
 
 @layer base {
@@ -21,11 +24,13 @@
     background: var(--color-ink);
     color: var(--color-steel);
     font-family: var(--font-sans);
+    font-synthesis-weight: none;
     -webkit-tap-highlight-color: transparent;
   }
   body {
     min-height: 100dvh;
-    background: radial-gradient(120% 60% at 50% -10%, rgb(255 255 255 / 0.07), transparent 60%), var(--color-ink);
+    overflow-x: clip;
+    background: var(--color-ink);
   }
   :focus-visible {
     outline: 2px solid var(--color-accent);
@@ -37,7 +42,66 @@
   .font-display-tight {
     font-family: var(--font-display);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
+  }
+  .micro-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-muted);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.86;
+    letter-spacing: -0.005em;
+  }
+  .hero-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.04em;
+  }
+  .hero-line > span {
+    display: block;
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--line, 0) * 90ms + 80ms);
+  }
+  .hero-fade {
+    animation: fade-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--line, 0) * 90ms + 80ms);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 48s linear infinite;
+    will-change: transform;
+  }
+  [data-reveal] {
+    transition:
+      opacity 600ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  [data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  .card-photo {
+    transition:
+      transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      filter 500ms ease-out;
+  }
+  @media (hover: hover) {
+    .card-photo {
+      filter: grayscale(0.85) contrast(1.05);
+    }
+    .group:hover .card-photo,
+    .group:focus-visible .card-photo {
+      filter: none;
+      transform: scale(1.04);
+    }
   }
   .chrome-text {
     background: linear-gradient(to right, rgb(255 255 255 / 0.85), rgb(23 241 4 / 0.9));
@@ -46,7 +110,7 @@
     color: transparent;
   }
   .metal-card {
-    background: linear-gradient(160deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015) 40%), var(--color-panel);
+    background: var(--color-panel);
     border: 1px solid var(--color-edge);
   }
   .sheen {
@@ -124,6 +188,32 @@
   }
 }
 
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes badge-pop {
   from {
     opacity: 0;
@@ -137,8 +227,23 @@
 
 @media (prefers-reduced-motion: reduce) {
   .skeleton::after,
-  .badge-pop {
+  .badge-pop,
+  .hero-line > span,
+  .hero-fade,
+  .marquee-track {
     animation: none;
+  }
+  [data-reveal],
+  .card-photo {
+    transition-duration: 1ms;
+  }
+  [data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+  .group:hover .card-photo,
+  .group:focus-visible .card-photo {
+    transform: none;
   }
   .press:hover,
   .press:active {

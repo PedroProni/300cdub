@@ -20,7 +20,7 @@ watch(
 
 <template>
   <div v-if="state.open" class="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-4 sm:items-center" @keydown.esc="cancel" @click.self="cancel">
-    <div role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-message" class="metal-card w-full max-w-md rounded-xl p-6">
+    <div role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-message" class="metal-card w-full max-w-md rounded-sm p-6">
       <h2 id="confirm-title" class="font-display-tight text-xl text-steel">{{ state.title }}</h2>
       <p id="confirm-message" class="mt-2 text-sm text-muted">{{ state.message }}</p>
       <div class="mt-6 flex justify-end gap-3">

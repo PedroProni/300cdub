@@ -14,10 +14,10 @@ const percent = computed(() => discountPercent(props.price, props.promoPrice));
 <template>
   <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
     <template v-if="percent > 0 && props.promoPrice !== null">
-      <span class="font-display-tight font-semibold text-steel" :class="props.large ? 'text-3xl' : 'text-lg'" data-testid="price-current">{{ format(props.promoPrice) }}</span>
+      <span class="font-mono font-medium tracking-tight text-steel" :class="props.large ? 'text-3xl' : 'text-base'" data-testid="price-current">{{ format(props.promoPrice) }}</span>
       <s class="text-sm text-muted" data-testid="price-old">{{ format(props.price) }}</s>
-      <span class="rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-black" data-testid="price-discount">{{ t("product.discount", { percent }) }}</span>
+      <span class="rounded-sm bg-accent px-1.5 py-0.5 text-[11px] font-medium text-black" data-testid="price-discount">{{ t("product.discount", { percent }) }}</span>
     </template>
-    <span v-else class="font-display-tight font-semibold text-steel" :class="props.large ? 'text-3xl' : 'text-lg'" data-testid="price-current">{{ format(props.price) }}</span>
+    <span v-else class="font-mono font-medium tracking-tight text-steel" :class="props.large ? 'text-3xl' : 'text-base'" data-testid="price-current">{{ format(props.price) }}</span>
   </div>
 </template>

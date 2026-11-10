@@ -58,9 +58,9 @@ async function save(): Promise<void> {
 
 <template>
   <div class="flex flex-col gap-5">
-    <h1 class="font-display-tight text-2xl font-bold text-steel">{{ t("nav.settings") }}</h1>
+    <h1 class="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("nav.settings") }}</h1>
     <SkeletonForm v-if="store.loading" :fields="4" />
-    <form v-else class="metal-card flex flex-col gap-4 rounded-xl p-4 sm:p-6" novalidate @submit.prevent="save">
+    <form v-else class="metal-card flex flex-col gap-4 rounded-sm p-4 sm:p-6" novalidate @submit.prevent="save">
       <BaseInput v-model="form.instagramHandle" :label="t('admin.settings.instagram')" :hint="t('admin.settings.instagramHint')" :error="handleError" autocomplete="off" />
       <BaseInput
         v-model="form.whatsappNumber"
@@ -72,7 +72,7 @@ async function save(): Promise<void> {
         autocomplete="off"
       />
       <BaseTextarea v-model="form.messageTemplate" :label="t('admin.settings.template')" :hint="t('admin.settings.templateHint')" />
-      <div class="rounded-md border border-edge bg-ink p-3">
+      <div class="rounded-sm border border-edge bg-ink p-3">
         <p class="text-xs font-semibold text-muted">{{ t("admin.settings.preview") }}</p>
         <p class="mt-1 whitespace-pre-line text-sm text-steel" data-testid="template-preview">{{ preview }}</p>
       </div>

@@ -5,6 +5,12 @@ export interface ProductCardProps {
   product: Product;
   eager?: boolean;
   priority?: boolean;
+  featured?: boolean;
+}
+
+export interface HeroImageProps {
+  product: Product | null;
+  loaded: boolean;
 }
 
 export interface CategoryChipsProps {

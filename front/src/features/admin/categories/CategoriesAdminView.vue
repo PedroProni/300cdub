@@ -85,15 +85,15 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col gap-5">
-    <h1 class="font-display-tight text-2xl font-bold text-steel">{{ t("nav.categories") }}</h1>
-    <form class="metal-card flex flex-wrap items-end gap-3 rounded-xl p-4" novalidate @submit.prevent="add">
+    <h1 class="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("nav.categories") }}</h1>
+    <form class="metal-card flex flex-wrap items-end gap-3 rounded-sm p-4" novalidate @submit.prevent="add">
       <div class="min-w-48 flex-1"><BaseInput v-model="name" :label="t('admin.categories.newLabel')" :error="nameError" /></div>
       <BaseButton type="submit" :loading="busy">{{ t("admin.categories.add") }}</BaseButton>
     </form>
     <SkeletonList v-if="store.loading" :count="3" />
     <EmptyState v-else-if="store.items.length === 0" :title="t('admin.categories.empty.title')" :description="t('admin.categories.empty.description')" />
     <ul ref="list" class="flex flex-col gap-2">
-      <li v-for="category in store.items" :key="category.id" class="metal-card flex items-center gap-2 rounded-xl p-2" data-testid="category-row">
+      <li v-for="category in store.items" :key="category.id" class="metal-card flex items-center gap-2 rounded-sm p-2" data-testid="category-row">
         <button type="button" data-drag-handle class="flex size-10 cursor-grab items-center justify-center text-muted hover:text-steel" :aria-label="t('common.dragToReorder')">
           <GripVertical class="size-5" aria-hidden="true" />
         </button>
@@ -102,24 +102,24 @@ onMounted(async () => {
             v-model="editingName"
             type="text"
             :aria-label="t('admin.categories.newLabel')"
-            class="min-h-11 min-w-0 flex-1 rounded-md border border-edge bg-ink px-3 text-base text-steel"
+            class="min-h-11 min-w-0 flex-1 rounded-sm border border-edge bg-ink px-3 text-base text-steel"
             @keydown.enter.prevent="saveEdit(category)"
           />
-          <button type="button" class="flex size-11 items-center justify-center rounded-md text-accent hover:bg-raised" :aria-label="t('common.save')" @click="saveEdit(category)">
+          <button type="button" class="flex size-11 items-center justify-center rounded-sm text-accent hover:bg-raised" :aria-label="t('common.save')" @click="saveEdit(category)">
             <Check class="size-5" aria-hidden="true" />
           </button>
-          <button type="button" class="flex size-11 items-center justify-center rounded-md text-muted hover:bg-raised" :aria-label="t('common.cancel')" @click="editingId = null">
+          <button type="button" class="flex size-11 items-center justify-center rounded-sm text-muted hover:bg-raised" :aria-label="t('common.cancel')" @click="editingId = null">
             <X class="size-5" aria-hidden="true" />
           </button>
         </template>
         <template v-else>
           <span class="min-w-0 flex-1 truncate px-2 font-semibold text-steel">{{ category.name }}</span>
-          <button type="button" class="flex size-11 items-center justify-center rounded-md text-steel hover:bg-raised" :aria-label="t('common.edit')" @click="startEdit(category)">
+          <button type="button" class="flex size-11 items-center justify-center rounded-sm text-steel hover:bg-raised" :aria-label="t('common.edit')" @click="startEdit(category)">
             <Pencil class="size-5" aria-hidden="true" />
           </button>
           <button
             type="button"
-            class="flex size-11 items-center justify-center rounded-md text-danger hover:bg-danger/15"
+            class="flex size-11 items-center justify-center rounded-sm text-danger hover:bg-danger/15"
             :aria-label="t('common.delete')"
             @click="remove(category)"
           >

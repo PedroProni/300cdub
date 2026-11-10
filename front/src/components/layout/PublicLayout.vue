@@ -15,7 +15,7 @@ site.load();
     t("nav.skip")
   }}</a>
   <SiteHeader />
-  <main id="content" class="mx-auto min-h-[60vh] max-w-6xl px-4 pt-6">
+  <main id="content" class="mx-auto min-h-[60vh] max-w-7xl px-4 pt-6">
     <RouterView v-slot="{ Component, route }">
       <Transition name="page" mode="out-in"><component :is="Component" :key="route.path" /></Transition>
     </RouterView>

@@ -44,8 +44,8 @@ function onScroll(): void {
 </script>
 
 <template>
-  <div class="flex flex-col gap-3">
-    <div class="metal-card relative aspect-square overflow-hidden rounded-xl">
+  <div class="flex flex-col gap-3 lg:flex-row-reverse">
+    <div class="relative aspect-[4/5] w-full overflow-hidden border border-edge bg-raised lg:max-h-[80vh] lg:flex-1">
       <div v-if="count > 0" ref="track" class="gallery-track size-full touch-pan-x" data-testid="gallery-track" @scroll.passive="onScroll">
         <div v-for="(image, position) in props.images" :key="image.id" class="gallery-slide size-full" data-testid="gallery-slide">
           <ResponsiveImage
@@ -59,11 +59,11 @@ function onScroll(): void {
           />
         </div>
       </div>
-      <div v-else class="font-display-tight flex size-full items-center justify-center text-muted">{{ t("catalog.noImage") }}</div>
+      <div v-else class="micro-label flex size-full items-center justify-center">{{ t("catalog.noImage") }}</div>
       <template v-if="count > 1">
         <button
           type="button"
-          class="absolute left-2 top-1/2 size-10 -translate-y-1/2 rounded-full bg-black/60 text-xl text-steel transition-[transform,background-color] duration-150 hover:bg-black active:scale-90 motion-reduce:transition-none"
+          class="absolute left-2 top-1/2 size-10 -translate-y-1/2 rounded-sm border border-edge bg-ink/80 text-xl text-steel transition-[transform,background-color,border-color] duration-150 hover:border-accent active:scale-90 motion-reduce:transition-none"
           :aria-label="t('product.gallery.previous')"
           @click="go(-1)"
         >
@@ -71,26 +71,27 @@ function onScroll(): void {
         </button>
         <button
           type="button"
-          class="absolute right-2 top-1/2 size-10 -translate-y-1/2 rounded-full bg-black/60 text-xl text-steel transition-[transform,background-color] duration-150 hover:bg-black active:scale-90 motion-reduce:transition-none"
+          class="absolute right-2 top-1/2 size-10 -translate-y-1/2 rounded-sm border border-edge bg-ink/80 text-xl text-steel transition-[transform,background-color,border-color] duration-150 hover:border-accent active:scale-90 motion-reduce:transition-none"
           :aria-label="t('product.gallery.next')"
           @click="go(1)"
         >
           <ChevronRight class="mx-auto size-5" aria-hidden="true" />
         </button>
+        <span class="micro-label absolute bottom-3 left-3 bg-ink/80 px-2 py-1" data-testid="gallery-counter">{{ index + 1 }} / {{ count }}</span>
       </template>
     </div>
-    <div v-if="count > 1" class="flex gap-2 overflow-x-auto pb-1">
+    <div v-if="count > 1" class="flex gap-2 overflow-x-auto pb-1 lg:w-20 lg:shrink-0 lg:flex-col lg:overflow-y-auto lg:overflow-x-hidden lg:pb-0">
       <button
         v-for="(image, position) in props.images"
         :key="image.id"
         type="button"
-        class="size-16 shrink-0 overflow-hidden rounded-md border-2 transition-[border-color,opacity] duration-150 motion-reduce:transition-none"
+        class="size-16 shrink-0 lg:size-20 overflow-hidden rounded-sm border transition-[border-color,opacity] duration-150 motion-reduce:transition-none"
         :class="position === index ? 'border-accent' : 'border-edge opacity-70 hover:opacity-100'"
         :aria-label="t('product.gallery.show', { number: position + 1 })"
         :aria-current="position === index"
         @click="scrollToIndex(position)"
       >
-        <img :src="image.urls.thumb" alt="" width="64" height="64" loading="lazy" decoding="async" class="size-full object-cover" />
+        <img :src="image.urls.thumb" alt="" width="80" height="80" loading="lazy" decoding="async" class="size-full object-cover" />
       </button>
     </div>
   </div>

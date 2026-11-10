@@ -11,7 +11,7 @@ useHead({ title: () => `${t("notFound.title")} | ${t("brand.name")}` });
 
 <template>
   <EmptyState :title="t('notFound.title')" :description="t('notFound.description')">
-    <RouterLink :to="{ name: ROUTE_NAMES.home }" class="font-display-tight inline-flex min-h-11 items-center rounded-md bg-accent px-5 text-sm font-semibold text-black">{{
+    <RouterLink :to="{ name: ROUTE_NAMES.home }" class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-lg font-bold text-black">{{
       t("notFound.back")
     }}</RouterLink>
   </EmptyState>

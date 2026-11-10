@@ -73,32 +73,32 @@ async function openInstagram(): Promise<void> {
 <template>
   <ContactSkeleton v-if="store.loading" />
   <EmptyState v-else-if="store.notFound || store.failed" :title="t('product.notFound.title')" :description="t('product.notFound.description')">
-    <RouterLink :to="{ name: ROUTE_NAMES.catalog }" class="font-display-tight inline-flex min-h-11 items-center rounded-md bg-accent px-5 text-sm font-semibold text-black">{{
+    <RouterLink :to="{ name: ROUTE_NAMES.catalog }" class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-lg font-bold text-black">{{
       t("product.notFound.back")
     }}</RouterLink>
   </EmptyState>
-  <div v-else-if="product" class="mx-auto flex max-w-2xl flex-col gap-6">
-    <RouterLink :to="{ name: ROUTE_NAMES.product, params: { slug: product.slug } }" class="text-sm text-muted hover:text-accent">{{ t("contact.back") }}</RouterLink>
-    <h1 class="font-display-tight text-3xl font-bold text-steel">{{ t("contact.title") }}</h1>
-    <div class="metal-card flex items-center gap-4 rounded-xl p-3" data-testid="contact-summary">
+  <div v-else-if="product" class="mx-auto flex max-w-3xl flex-col gap-6">
+    <RouterLink :to="{ name: ROUTE_NAMES.product, params: { slug: product.slug } }" class="micro-label inline-flex min-h-11 items-center self-start hover:text-accent">{{ t("contact.back") }}</RouterLink>
+    <h1 class="font-display text-6xl font-extrabold uppercase leading-[0.88] tracking-tight text-steel sm:text-7xl">{{ t("contact.title") }}</h1>
+    <div class="flex items-center gap-4 border border-edge bg-panel p-3" data-testid="contact-summary">
       <img
         v-if="product.images[0]"
         :src="product.images[0].urls.thumb"
         :alt="product.name"
-        width="80"
-        height="80"
+        width="96"
+        height="96"
         decoding="async"
-        class="size-20 shrink-0 rounded-md object-cover"
+        class="size-24 shrink-0 object-cover"
       />
-      <div class="flex flex-col gap-1">
-        <p class="font-semibold text-steel">{{ product.name }}</p>
-        <p v-if="size" class="text-sm text-muted">{{ t("contact.size", { size }) }}</p>
+      <div class="flex flex-col gap-1.5">
+        <p class="font-display-tight text-2xl font-bold leading-none text-steel">{{ product.name }}</p>
+        <p v-if="size" class="micro-label">{{ t("contact.size", { size }) }}</p>
         <PriceTag :price="product.price" :promo-price="product.promoPrice" />
       </div>
     </div>
-    <div class="flex flex-col gap-1.5">
-      <label for="contact-message" class="text-sm font-medium text-steel">{{ t("contact.messageLabel") }}</label>
-      <textarea id="contact-message" v-model="message" rows="6" class="rounded-md border border-edge bg-ink px-3 py-2 text-base text-steel" @input="markEdited" />
+    <div class="flex flex-col gap-2">
+      <label for="contact-message" class="micro-label">{{ t("contact.messageLabel") }}</label>
+      <textarea id="contact-message" v-model="message" rows="6" class="rounded-sm border border-edge bg-ink px-3 py-3 text-sm text-steel" @input="markEdited" />
       <p class="text-xs text-muted">{{ t("contact.messageHint") }}</p>
     </div>
     <div class="grid gap-3 sm:grid-cols-2">
@@ -107,17 +107,17 @@ async function openInstagram(): Promise<void> {
         target="_blank"
         rel="noopener noreferrer"
         :aria-disabled="!hasMessage || !whatsappHref"
-        class="font-display-tight inline-flex min-h-14 items-center justify-center press rounded-md bg-accent px-6 text-base font-bold text-black hover:bg-accent-hot aria-disabled:pointer-events-none aria-disabled:opacity-50"
+        class="font-display-tight inline-flex min-h-14 items-center justify-center rounded-sm border border-accent-fill bg-accent-fill px-6 text-xl font-bold text-black transition-colors hover:border-accent hover:bg-accent aria-disabled:pointer-events-none aria-disabled:opacity-50"
         data-testid="whatsapp"
       >
         {{ t("contact.whatsapp") }}
       </a>
-      <BaseButton variant="secondary" class="min-h-14 text-base" :disabled="!hasMessage || !instagramHref" data-testid="instagram" @click="openInstagram">{{
+      <BaseButton variant="secondary" class="min-h-14 text-xl" :disabled="!hasMessage || !instagramHref" data-testid="instagram" @click="openInstagram">{{
         t("contact.instagram.button")
       }}</BaseButton>
     </div>
-    <p class="text-sm text-muted">{{ t("contact.instagram.preHint") }}</p>
-    <p v-if="copied" role="status" class="rounded-md border border-accent/60 bg-accent/10 px-4 py-3 text-sm font-semibold text-accent" data-testid="copied-hint">
+    <p class="text-xs text-muted">{{ t("contact.instagram.preHint") }}</p>
+    <p v-if="copied" role="status" class="rounded-sm border border-accent/60 bg-accent/10 px-4 py-3 text-sm font-medium text-accent" data-testid="copied-hint">
       {{ t("contact.instagram.copiedHint") }}
     </p>
   </div>

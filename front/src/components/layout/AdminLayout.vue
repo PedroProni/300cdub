@@ -22,26 +22,26 @@ async function signOut(): Promise<void> {
 
 <template>
   <header class="border-b border-edge bg-panel">
-    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-      <span class="font-display-tight chrome-text text-xl font-bold">{{ t("admin.title") }}</span>
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <span class="font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("admin.title") }}</span>
       <div class="flex flex-wrap items-center gap-2">
         <LanguageSwitcher />
         <BaseButton variant="ghost" @click="passwordOpen = true">{{ t("auth.changePassword.open") }}</BaseButton>
         <BaseButton variant="secondary" @click="signOut">{{ t("auth.logout") }}</BaseButton>
       </div>
     </div>
-    <nav class="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-4" :aria-label="t('nav.admin')">
+    <nav class="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4" :aria-label="t('nav.admin')">
       <RouterLink
         v-for="item in ADMIN_NAV_ITEMS"
         :key="item.name"
         :to="{ name: item.name }"
-        class="font-display-tight whitespace-nowrap border-b-2 border-transparent px-4 py-3 text-sm font-semibold text-muted transition-colors hover:text-steel"
+        class="micro-label whitespace-nowrap border-b-2 border-transparent px-4 py-4 transition-colors hover:text-steel"
         active-class="!border-accent !text-accent"
       >
         {{ t(item.labelKey) }}
       </RouterLink>
     </nav>
   </header>
-  <main class="mx-auto max-w-5xl px-4 py-6"><RouterView /></main>
+  <main class="mx-auto max-w-7xl px-4 py-6"><RouterView /></main>
   <ChangePasswordDialog v-if="passwordOpen" @close="passwordOpen = false" />
 </template>

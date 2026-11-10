@@ -65,27 +65,27 @@ onMounted(async () => {
 <template>
   <div class="flex flex-col gap-5">
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h1 class="font-display-tight text-2xl font-bold text-steel">{{ t("nav.products") }}</h1>
+      <h1 class="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("nav.products") }}</h1>
       <RouterLink
         :to="{ name: ROUTE_NAMES.adminProductNew }"
-        class="font-display-tight inline-flex min-h-11 items-center rounded-md bg-accent px-5 text-sm font-bold text-black hover:bg-accent-hot"
+        class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-sm font-bold text-black hover:border-accent hover:bg-accent"
         >{{ t("admin.products.new") }}</RouterLink
       >
     </div>
     <div v-if="store.items.length > 0" class="flex flex-col gap-1.5">
-      <label for="admin-product-search" class="text-sm font-medium text-steel">{{ t("admin.products.search") }}</label>
-      <input id="admin-product-search" v-model="query" type="search" class="min-h-11 rounded-md border border-edge bg-ink px-3 text-base text-steel" />
+      <label for="admin-product-search" class="micro-label">{{ t("admin.products.search") }}</label>
+      <input id="admin-product-search" v-model="query" type="search" class="min-h-11 rounded-sm border border-edge bg-ink px-3 text-base text-steel" />
       <p v-if="filtering" class="text-xs text-muted">{{ t("admin.products.reorderDisabled") }}</p>
     </div>
     <SkeletonList v-if="store.loading" :count="5" />
     <EmptyState v-else-if="store.items.length === 0 && !loadError" :title="t('admin.products.empty.title')" :description="t('admin.products.empty.description')">
-      <RouterLink :to="{ name: ROUTE_NAMES.adminProductNew }" class="font-display-tight inline-flex min-h-11 items-center rounded-md bg-accent px-5 text-sm font-bold text-black">{{
+      <RouterLink :to="{ name: ROUTE_NAMES.adminProductNew }" class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-sm font-bold text-black">{{
         t("admin.products.new")
       }}</RouterLink>
     </EmptyState>
     <p v-else-if="visibleItems.length === 0 && !loadError" class="text-sm text-muted">{{ t("admin.products.noResults") }}</p>
     <ul ref="list" class="flex flex-col gap-3">
-      <li v-for="product in visibleItems" :key="product.id" class="metal-card flex flex-wrap items-center gap-3 rounded-xl p-3" data-testid="product-row">
+      <li v-for="product in visibleItems" :key="product.id" class="metal-card flex flex-wrap items-center gap-3 rounded-sm p-3" data-testid="product-row">
         <button
           v-if="!filtering"
           type="button"
@@ -95,8 +95,8 @@ onMounted(async () => {
         >
           <GripVertical class="size-5" aria-hidden="true" />
         </button>
-        <img v-if="product.images[0]" :src="product.images[0].urls.thumb" alt="" width="56" height="56" loading="lazy" decoding="async" class="size-14 rounded-md object-cover" />
-        <div v-else class="size-14 rounded-md bg-raised" />
+        <img v-if="product.images[0]" :src="product.images[0].urls.thumb" alt="" width="56" height="56" loading="lazy" decoding="async" class="size-14 rounded-sm object-cover" />
+        <div v-else class="size-14 rounded-sm bg-raised" />
         <div class="min-w-0 flex-1">
           <p class="truncate font-semibold text-steel">{{ product.name }}</p>
           <div class="mt-1 flex flex-wrap items-center gap-2">
@@ -116,13 +116,13 @@ onMounted(async () => {
           />
           <RouterLink
             :to="{ name: ROUTE_NAMES.adminProductEdit, params: { id: product.id } }"
-            class="flex size-11 items-center justify-center rounded-md text-steel hover:bg-raised"
+            class="flex size-11 items-center justify-center rounded-sm text-steel hover:bg-raised"
             :aria-label="t('common.edit')"
             ><Pencil class="size-5" aria-hidden="true"
           /></RouterLink>
           <button
             type="button"
-            class="flex size-11 items-center justify-center rounded-md text-danger hover:bg-danger/15"
+            class="flex size-11 items-center justify-center rounded-sm text-danger hover:bg-danger/15"
             :aria-label="t('common.delete')"
             @click="remove(product)"
           >

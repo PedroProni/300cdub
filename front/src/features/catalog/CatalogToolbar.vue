@@ -26,15 +26,15 @@ const options = computed(() => SORT_OPTIONS.map((option) => ({ value: option.val
 </script>
 
 <template>
-  <div class="grid gap-3 sm:grid-cols-[1fr_14rem]">
+  <div class="grid grid-cols-[1fr_9.5rem] gap-3 sm:grid-cols-[1fr_14rem] [&_label]:sr-only [&_select]:w-full [&_select]:text-xs [&>div]:min-w-0">
     <div class="flex flex-col gap-1.5">
-      <label for="catalog-search" class="text-sm font-medium text-steel">{{ t("catalog.search") }}</label>
+      <label for="catalog-search" class="micro-label">{{ t("catalog.search") }}</label>
       <input
         id="catalog-search"
         v-model="text"
         type="search"
         :placeholder="t('catalog.searchPlaceholder')"
-        class="min-h-11 rounded-md border border-edge bg-ink px-3 text-base text-steel placeholder:text-muted/60"
+        class="w-full min-h-11 rounded-sm border border-edge bg-ink px-3 text-sm text-steel placeholder:text-muted/60"
       />
     </div>
     <BaseSelect v-model="sortModel" :label="t('catalog.sortLabel')" :options="options" />

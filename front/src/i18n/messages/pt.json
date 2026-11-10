@@ -31,7 +31,8 @@
   },
   "footer": {
     "tagline": "Vivendo na fast lane: potência, velocidade e liberdade sobre rodas!",
-    "instagram": "Siga no Instagram"
+    "instagram": "Siga no Instagram",
+    "credits": "Créditos das imagens"
   },
   "home": {
     "metaTitle": "300c.dub | Vitrine de produtos",
@@ -41,7 +42,22 @@
     "cta": "Ver catálogo",
     "featuredTitle": "Destaques",
     "featuredEmptyTitle": "Em breve, novidades por aqui",
-    "featuredEmptyDescription": "Ainda não há produtos em destaque. Dê uma olhada no catálogo completo."
+    "featuredEmptyDescription": "Ainda não há produtos em destaque. Dê uma olhada no catálogo completo.",
+    "ctaSecondary": "Ver destaques",
+    "viewAll": "Ver tudo",
+    "viewAllTile": "Ver catálogo completo",
+    "hero": {
+      "line1": "Potência",
+      "line2": "Velocidade",
+      "line3": "Liberdade",
+      "pick": "Peça em destaque"
+    },
+    "marquee": {
+      "lane": "Vivendo na fast lane",
+      "power": "Potência",
+      "speed": "Velocidade",
+      "freedom": "Liberdade"
+    }
   },
   "catalog": {
     "title": "Catálogo",

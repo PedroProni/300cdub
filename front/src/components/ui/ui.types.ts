@@ -67,6 +67,11 @@ export interface ResponsiveImageProps {
 
 export interface SkeletonGridProps {
   count: number;
+  featured?: boolean;
+}
+
+export interface SkeletonCardProps {
+  featured?: boolean;
 }
 
 export interface SkeletonListProps {

@@ -9,7 +9,7 @@ const { t } = useI18n();
 
 <template>
   <fieldset class="flex flex-col gap-2">
-    <legend class="text-sm font-semibold text-steel">{{ t("product.sizeLabel") }}</legend>
+    <legend class="micro-label">{{ t("product.sizeLabel") }}</legend>
     <div class="flex flex-wrap gap-2">
       <button
         v-for="variant in props.variants"
@@ -18,8 +18,8 @@ const { t } = useI18n();
         :disabled="variant.stock <= 0"
         :aria-pressed="model === variant.id"
         :title="variant.stock <= 0 ? t('product.sizeSoldOut') : undefined"
-        class="font-display-tight min-h-11 min-w-14 rounded-md border px-4 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:text-muted/50 disabled:line-through"
-        :class="model === variant.id ? 'border-accent bg-accent text-black' : 'border-edge text-steel hover:border-accent'"
+        class="font-display-tight min-h-12 min-w-14 rounded-sm border px-4 text-xl font-bold transition-colors disabled:cursor-not-allowed disabled:text-muted/50 disabled:line-through"
+        :class="model === variant.id ? 'border-accent bg-accent/15 text-accent' : 'border-edge text-steel hover:border-accent'"
         @click="model = variant.id"
       >
         {{ variant.label }}
