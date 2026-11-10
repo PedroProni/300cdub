@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Barlow Condensed Fallback";
+  font-weight: 600 800;
+  src: local("Arial Bold"), local("Liberation Sans Bold"), local("Arimo Bold"), local("Helvetica Bold");
+  size-adjust: 73%;
+  ascent-override: 137%;
+  descent-override: 27.4%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  font-weight: 400 500;
+  src: local("Courier New"), local("Liberation Mono"), local("Cousine"), local("Menlo");
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
 @theme {
   --color-ink: #0a0a0a;
   --color-panel: #111111;
@@ -13,9 +33,9 @@
   --color-danger: #ef4444;
   --color-ok: #17f104;
   --color-warn: #e0a526;
-  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
-  --font-sans: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: "Barlow Condensed", "Barlow Condensed Fallback", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --header-height: 3.5rem;
 }
 

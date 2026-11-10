@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { ChevronLeft, ChevronRight } from "lucide-vue-next";
 import ResponsiveImage from "@/components/ui/ResponsiveImage.vue";
-import { GALLERY_SIZES } from "@/features/product/product-view.constants";
+import { GALLERY_REST_FALLBACK_MS, GALLERY_SIZES } from "@/features/product/product-view.constants";
 import type { ProductGalleryProps } from "@/features/product/product-view.types";
 
 const props = defineProps<ProductGalleryProps>();
 const { t } = useI18n();
 const index = ref(0);
+const restReady = ref(false);
+let restTimer = 0;
 const track = ref<HTMLElement | null>(null);
 let frame = 0;
 
@@ -21,6 +23,15 @@ watch(
     track.value?.scrollTo({ left: 0, behavior: "instant" });
   },
 );
+
+onMounted(() => {
+  restTimer = window.setTimeout(() => (restReady.value = true), GALLERY_REST_FALLBACK_MS);
+});
+
+onBeforeUnmount(() => {
+  window.clearTimeout(restTimer);
+  cancelAnimationFrame(frame);
+});
 
 function scrollToIndex(target: number): void {
   const element = track.value;
@@ -47,8 +58,9 @@ function onScroll(): void {
   <div class="flex flex-col gap-3 lg:flex-row-reverse">
     <div class="relative aspect-[4/5] w-full overflow-hidden border border-edge bg-raised max-h-[70vh] lg:flex-1">
       <div v-if="count > 0" ref="track" class="gallery-track size-full touch-pan-x" data-testid="gallery-track" @scroll.passive="onScroll">
-        <div v-for="(image, position) in props.images" :key="image.id" class="gallery-slide size-full" data-testid="gallery-slide">
+        <div v-for="(image, position) in props.images" :key="image.id" class="gallery-slide size-full" data-testid="gallery-slide" @load.capture="restReady = true">
           <ResponsiveImage
+            v-if="position === 0 || restReady"
             :urls="image.urls"
             :alt="props.alt"
             :sizes="GALLERY_SIZES"

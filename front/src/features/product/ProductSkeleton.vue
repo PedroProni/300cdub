@@ -1,7 +1,7 @@
 <template>
   <div class="grid gap-8 lg:grid-cols-12 lg:gap-12" aria-busy="true" data-testid="product-skeleton">
     <div class="flex flex-col gap-3 lg:col-span-7 lg:flex-row-reverse" aria-hidden="true">
-      <div class="skeleton aspect-[4/5] w-full lg:flex-1" />
+      <div class="skeleton aspect-[4/5] max-h-[70vh] w-full lg:flex-1" />
       <div class="flex gap-2 lg:w-20 lg:shrink-0 lg:flex-col"><div v-for="n in 3" :key="n" class="skeleton size-16 shrink-0 lg:size-20" /></div>
     </div>
     <div class="flex flex-col gap-5 lg:col-span-5" aria-hidden="true">

@@ -40,11 +40,14 @@ describe("ProductView", () => {
     expect(wrapper.get('[data-testid="gallery-counter"]').text()).toBe("1 / 2");
   });
 
-  it("renders every image as a snap slide and lazy loads the later ones", async () => {
+  it("renders every slide, loads only the first image eagerly and the rest after it loads", async () => {
     const images = ["a", "b", "c"].map((id) => ({ id, isCover: id === "a", urls: { thumb: `http://i/${id}t`, medium: `http://i/${id}m`, large: `http://i/${id}l` } }));
     vi.mocked(publicApi.product).mockResolvedValue(makeProduct({ images }));
     const { wrapper } = mountWithApp(ProductView, { props: { slug: "camiseta-300c" } });
     await flushPromises();
+    expect(wrapper.findAll('[data-testid="gallery-slide"]').length).toBe(3);
+    expect(wrapper.findAll('[data-testid="gallery-slide"] img').map((img) => img.attributes("loading"))).toEqual(["eager"]);
+    await wrapper.get('[data-testid="gallery-slide"] img').trigger("load");
     const slides = wrapper.findAll('[data-testid="gallery-slide"] img');
     expect(slides.map((img) => img.attributes("loading"))).toEqual(["eager", "lazy", "lazy"]);
     expect(wrapper.get('[data-testid="gallery-track"]').classes()).toContain("gallery-track");
