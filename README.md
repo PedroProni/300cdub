@@ -4,7 +4,7 @@ Showroom for the 300c.dub car page: a mobile-first public catalog of t-shirts an
 
 | Part | Folder | Stack |
 | --- | --- | --- |
-| API | [`back`](back/README.md) | NestJS 11, MongoDB, S3-compatible storage (MinIO / Cloudflare R2), sharp |
+| API | [`back`](back/README.md) | NestJS 11, MongoDB, S3-compatible storage (MinIO by default, R2 optional), sharp |
 | Web (showroom and `/admin`) | [`front`](front/README.md) | Vue 3, Vite, TypeScript, Pinia, vue-i18n (PT-BR and EN), Tailwind |
 
 ## Run everything locally

@@ -33,9 +33,9 @@ npm run start:dev
 
 Swagger is served at `/docs` when `SWAGGER_ENABLED` is not `false`. All JSON routes live under `/api`. The first admin is created from `ADMIN_EMAIL` and `ADMIN_PASSWORD` when no admin exists; later changes to those variables do nothing, use the change password route.
 
-## Object storage (MinIO locally, Cloudflare R2 in production)
+## Object storage (MinIO by default, Cloudflare R2 optional)
 
-The same code runs on both through environment variables only.
+The same code runs on both through environment variables only. Everything works with MinIO and no paid service; R2 is only an option for anyone who already has it (enabling R2 asks for a payment method on the Cloudflare account).
 
 | Variable | MinIO (local) | Cloudflare R2 |
 | --- | --- | --- |
