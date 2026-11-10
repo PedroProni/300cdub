@@ -20,3 +20,5 @@ export const FEATURED_CARD_SIZES = "(min-width: 1024px) 640px, 100vw";
 export const EAGER_CARD_COUNT = 4;
 
 export const LOAD_MORE_ROOT_MARGIN = "400px";
+
+export const SORT_LABEL_MAX_LENGTH = 13;

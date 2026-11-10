@@ -69,7 +69,7 @@
     "searchPlaceholder": "Nome do produto",
     "sortLabel": "Ordenar por",
     "sort": {
-      "manual": "Destaques da loja",
+      "manual": "Destaques",
       "newest": "Mais recentes",
       "priceAsc": "Menor preço",
       "priceDesc": "Maior preço"
