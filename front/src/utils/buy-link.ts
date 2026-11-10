@@ -1,4 +1,4 @@
-import { API_PUBLIC_ORIGIN } from "@/config/env";
+import { API_PUBLIC_ORIGIN } from "@/config/env.constants";
 import { INSTAGRAM_DM_BASE, INSTAGRAM_PROFILE_BASE, TEMPLATE_PRODUCT_TOKEN, TEMPLATE_SIZE_TOKEN, WHATSAPP_BASE } from "@/utils/buy-link.constants";
 
 export function fillTemplate(template: string, product: string, size: string): string {

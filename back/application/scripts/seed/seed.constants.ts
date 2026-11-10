@@ -1,5 +1,13 @@
 import { SeedProduct } from './seed.types';
 
+export const SEED_API = process.env.SEED_API_URL ?? 'http://localhost:3000/api';
+
+export const SEED_EMAIL = process.env.ADMIN_EMAIL ?? '';
+
+export const SEED_PASSWORD = process.env.ADMIN_PASSWORD ?? '';
+
+export const SEED_ORIGIN = process.env.SEED_ORIGIN;
+
 export const SEED_CATEGORIES = ['Camisetas', 'Colecionáveis', 'Acessórios'];
 
 export const SEED_SETTINGS = {

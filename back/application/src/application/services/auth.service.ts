@@ -1,12 +1,10 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { compare, hash, hashSync } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import { AppError } from '@common/helpers/app-error';
 import { AdminRepository } from '@infrastructure/database/repositories/admin.repository';
 import { AuthenticatedAdmin } from '@domain/types/authenticated-admin.type';
 import { ErrorCode } from '@domain/enums/error-code.enum';
-import { BCRYPT_ROUNDS } from '@domain/constants/auth.constant';
-
-const DUMMY_HASH = hashSync('dummy-password', BCRYPT_ROUNDS);
+import { BCRYPT_ROUNDS, DUMMY_PASSWORD_HASH } from '@domain/constants/auth.constant';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +12,7 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<AuthenticatedAdmin> {
     const admin = await this.admins.findByEmail(email.trim().toLowerCase());
-    const valid = await compare(password, admin?.passwordHash ?? DUMMY_HASH);
+    const valid = await compare(password, admin?.passwordHash ?? DUMMY_PASSWORD_HASH);
     if (!admin || !valid) throw new AppError(ErrorCode.InvalidCredentials, 'Invalid email or password', HttpStatus.UNAUTHORIZED);
     return { id: String(admin._id), email: admin.email };
   }

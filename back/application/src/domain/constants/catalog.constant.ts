@@ -11,3 +11,5 @@ export const MAX_DESCRIPTION_LENGTH = 4000;
 export const MAX_VARIANT_LABEL_LENGTH = 40;
 export const SLUG_FALLBACK = 'item';
 export const MAX_REORDER_IDS = 500;
+
+export const NO_MATCH_CATEGORY_ID = '000000000000000000000000';

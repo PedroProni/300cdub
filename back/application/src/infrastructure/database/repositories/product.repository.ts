@@ -1,35 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model, SortOrder, Types } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 import { Product } from '@infrastructure/database/schemas/product.schema';
 import { ProductImage } from '@infrastructure/database/schemas/product-image.schema';
 import { ProductRecord } from '@domain/types/records.type';
 import { ProductInput } from '@domain/types/product-write.type';
-import { ProductSort } from '@domain/enums/product-sort.enum';
+import { SORTS } from '@domain/constants/product-sort.constant';
+import { ProductListFilter } from '@domain/types/product-list-filter.type';
 import { escapeRegex } from '@common/helpers/escape-regex.helper';
-
-type ListFilter = {
-  onlyVisible: boolean;
-  categoryId?: string | null;
-  featured?: boolean;
-  search?: string;
-  sort: ProductSort;
-  skip: number;
-  limit: number;
-};
-
-const SORTS: Record<ProductSort, Record<string, SortOrder>> = {
-  [ProductSort.Manual]: { sortOrder: 1, _id: 1 },
-  [ProductSort.PriceAsc]: { price: 1, _id: 1 },
-  [ProductSort.PriceDesc]: { price: -1, _id: 1 },
-  [ProductSort.Newest]: { createdAt: -1, _id: -1 },
-};
 
 @Injectable()
 export class ProductRepository {
   constructor(@InjectModel(Product.name) private readonly model: Model<Product>) {}
 
-  async list(filter: ListFilter): Promise<{ items: ProductRecord[]; total: number }> {
+  async list(filter: ProductListFilter): Promise<{ items: ProductRecord[]; total: number }> {
     const query: FilterQuery<Product> = {};
     if (filter.onlyVisible) query.visible = true;
     if (filter.categoryId !== undefined) query.categoryId = filter.categoryId ? new Types.ObjectId(filter.categoryId) : null;
@@ -66,7 +50,10 @@ export class ProductRepository {
   }
 
   update(id: string, input: ProductInput, slug: string): Promise<ProductRecord | null> {
-    return this.model.findByIdAndUpdate(id, { $set: { ...input, slug } }, { new: true }).lean<ProductRecord>().exec();
+    return this.model
+      .findByIdAndUpdate(id, { $set: { ...input, slug } }, { new: true })
+      .lean<ProductRecord>()
+      .exec();
   }
 
   async delete(id: string): Promise<boolean> {
@@ -95,6 +82,9 @@ export class ProductRepository {
   }
 
   pullImage(id: string, imageId: string): Promise<ProductRecord | null> {
-    return this.model.findByIdAndUpdate(id, { $pull: { images: { id: imageId } } }, { new: false }).lean<ProductRecord>().exec();
+    return this.model
+      .findByIdAndUpdate(id, { $pull: { images: { id: imageId } } }, { new: false })
+      .lean<ProductRecord>()
+      .exec();
   }
 }

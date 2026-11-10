@@ -1,15 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { Response } from 'express';
 import { ErrorCode } from '@domain/enums/error-code.enum';
-
-const STATUS_CODES: Record<number, ErrorCode> = {
-  [HttpStatus.BAD_REQUEST]: ErrorCode.ValidationFailed,
-  [HttpStatus.UNAUTHORIZED]: ErrorCode.Unauthorized,
-  [HttpStatus.FORBIDDEN]: ErrorCode.InvalidOrigin,
-  [HttpStatus.NOT_FOUND]: ErrorCode.NotFound,
-  [HttpStatus.PAYLOAD_TOO_LARGE]: ErrorCode.ImageTooLarge,
-  [HttpStatus.TOO_MANY_REQUESTS]: ErrorCode.TooManyRequests,
-};
+import { INTERNAL_ERROR_MESSAGE, STATUS_CODES } from '@domain/constants/http-status.constant';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -19,7 +11,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const res = host.switchToHttp().getResponse<Response>();
     if (!(exception instanceof HttpException)) {
       this.logger.error(exception instanceof Error ? exception.stack : String(exception));
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, code: ErrorCode.Internal, message: 'Internal server error' });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ statusCode: HttpStatus.INTERNAL_SERVER_ERROR, code: ErrorCode.Internal, message: INTERNAL_ERROR_MESSAGE });
       return;
     }
     const status = exception.getStatus();

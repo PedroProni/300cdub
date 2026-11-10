@@ -8,8 +8,7 @@ import { Paginated } from '@domain/types/paginated.type';
 import { ProductView } from '@domain/types/product-view.type';
 import { ProductQuery } from '@domain/types/product-query.type';
 import { ErrorCode } from '@domain/enums/error-code.enum';
-
-const NO_MATCH_ID = '000000000000000000000000';
+import { NO_MATCH_CATEGORY_ID } from '@domain/constants/catalog.constant';
 
 @Injectable()
 export class PublicCatalogService {
@@ -27,7 +26,7 @@ export class PublicCatalogService {
     const category = query.categorySlug ? await this.categories.findBySlug(query.categorySlug) : null;
     const { items, total } = await this.products.list({
       onlyVisible: true,
-      categoryId: query.categorySlug ? (category ? String(category._id) : NO_MATCH_ID) : undefined,
+      categoryId: query.categorySlug ? (category ? String(category._id) : NO_MATCH_CATEGORY_ID) : undefined,
       featured: query.featured,
       search: query.search,
       sort: query.sort,

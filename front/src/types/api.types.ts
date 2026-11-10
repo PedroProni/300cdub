@@ -14,3 +14,5 @@ export interface ApiErrorPayload {
   code?: string;
   message?: string | string[];
 }
+
+export type UnauthorizedHandler = () => void;

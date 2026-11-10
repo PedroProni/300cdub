@@ -10,7 +10,7 @@ import { ProductInput } from '@domain/types/product-write.type';
 import { ProductRecord } from '@domain/types/records.type';
 import { ProductSort } from '@domain/enums/product-sort.enum';
 import { ErrorCode } from '@domain/enums/error-code.enum';
-import { MAX_REORDER_IDS } from '@domain/constants/catalog.constant';
+import { MAX_REORDER_IDS, NO_MATCH_CATEGORY_ID } from '@domain/constants/catalog.constant';
 
 @Injectable()
 export class ProductService {
@@ -25,7 +25,7 @@ export class ProductService {
     const category = categorySlug ? await this.categories.findBySlug(categorySlug) : null;
     const { items } = await this.products.list({
       onlyVisible: false,
-      categoryId: categorySlug ? (category ? String(category._id) : '000000000000000000000000') : undefined,
+      categoryId: categorySlug ? (category ? String(category._id) : NO_MATCH_CATEGORY_ID) : undefined,
       search,
       sort: ProductSort.Manual,
       skip: 0,

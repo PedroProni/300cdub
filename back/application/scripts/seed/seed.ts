@@ -1,19 +1,14 @@
 import sharp from 'sharp';
-import { SEED_CATEGORIES, SEED_PRODUCTS, SEED_SETTINGS } from './seed.constants';
+import { SEED_API, SEED_CATEGORIES, SEED_EMAIL, SEED_ORIGIN, SEED_PASSWORD, SEED_PRODUCTS, SEED_SETTINGS } from './seed.constants';
 import { SeedProduct } from './seed.types';
-
-const API = process.env.SEED_API_URL ?? 'http://localhost:3000/api';
-const EMAIL = process.env.ADMIN_EMAIL ?? '';
-const PASSWORD = process.env.ADMIN_PASSWORD ?? '';
-const ORIGIN = process.env.SEED_ORIGIN;
 
 let cookie = '';
 
 async function call<T>(method: string, path: string, body?: unknown, form?: FormData): Promise<T> {
   const headers: Record<string, string> = { Cookie: cookie };
-  if (ORIGIN) headers.Origin = ORIGIN;
+  if (SEED_ORIGIN) headers.Origin = SEED_ORIGIN;
   if (body) headers['Content-Type'] = 'application/json';
-  const res = await fetch(`${API}${path}`, { method, headers, body: form ?? (body ? JSON.stringify(body) : undefined) });
+  const res = await fetch(`${SEED_API}${path}`, { method, headers, body: form ?? (body ? JSON.stringify(body) : undefined) });
   if (!res.ok) throw new Error(`${method} ${path} ${res.status} ${await res.text()}`);
   const set = res.headers.get('set-cookie');
   if (set) cookie = set.split(';')[0];
@@ -26,8 +21,8 @@ function placeholder(product: SeedProduct): Promise<Buffer> {
 }
 
 async function main(): Promise<void> {
-  if (!EMAIL || !PASSWORD) throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD are required');
-  await call('POST', '/auth/login', { email: EMAIL, password: PASSWORD });
+  if (!SEED_EMAIL || !SEED_PASSWORD) throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD are required');
+  await call('POST', '/auth/login', { email: SEED_EMAIL, password: SEED_PASSWORD });
   const categoryIds = new Map<string, string>();
   for (const name of SEED_CATEGORIES) categoryIds.set(name, (await call<{ id: string }>('POST', '/admin/categories', { name })).id);
   await call('PUT', '/admin/settings', SEED_SETTINGS);

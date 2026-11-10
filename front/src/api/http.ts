@@ -1,8 +1,6 @@
-import { API_URL } from "@/config/env";
+import { API_URL } from "@/config/env.constants";
 import { ApiError } from "@/api/api-error";
-import type { ApiErrorPayload, RequestOptions } from "@/types/api.types";
-
-type UnauthorizedHandler = () => void;
+import type { ApiErrorPayload, RequestOptions, UnauthorizedHandler } from "@/types/api.types";
 
 let unauthorizedHandler: UnauthorizedHandler | null = null;
 
