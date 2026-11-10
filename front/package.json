@@ -1,43 +1,47 @@
 {
-  "name": "300cdub-lp",
-  "version": "0.0.0",
+  "name": "300cdub-front",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "dev": "vite --port 5173 --host",
+    "build": "vue-tsc --noEmit -p tsconfig.app.json && vite build",
+    "preview": "vite preview --port 5173 --host",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.app.json",
+    "test": "vitest run"
   },
   "dependencies": {
-    "lucide-vue-next": "^0.540.0",
-    "pinia": "^3.0.3",
-    "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "@fontsource/poppins": "^5.3.0",
+    "lucide-vue-next": "^1.0.0",
+    "pinia": "^4.1.0",
+    "sortablejs": "^1.15.7",
+    "vue": "^3.5.45",
+    "vue-i18n": "^11.4.18",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.2",
-    "@types/node": "^22.16.5",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@intlify/message-compiler": "^11.4.18",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/node": "^26.6.6",
+    "@types/sortablejs": "^1.15.9",
+    "@vitejs/plugin-vue": "^6.0.10",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.6.0",
-    "@vue/tsconfig": "^0.7.0",
-    "eslint": "^9.31.0",
-    "eslint-plugin-vue": "~10.3.0",
-    "init": "^0.1.2",
-    "jiti": "^2.4.2",
-    "npm-run-all2": "^8.0.4",
-    "npx": "^10.2.2",
-    "prettier": "3.6.2",
-    "typescript": "~5.8.0",
-    "vite": "^7.1.2",
-    "vite-plugin-vue-devtools": "^8.0.0",
-    "vue-tsc": "^3.0.4"
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.5.1",
+    "@vue/tsconfig": "^0.9.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-vue": "^10.12.1",
+    "jiti": "^2.7.0",
+    "jsdom": "^31.0.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14"
   }
 }

@@ -1,0 +1,29 @@
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import type { VariantPickerProps } from "@/features/product/product-view.types";
+
+const props = defineProps<VariantPickerProps>();
+const model = defineModel<string | null>({ required: true });
+const { t } = useI18n();
+</script>
+
+<template>
+  <fieldset class="flex flex-col gap-2">
+    <legend class="text-sm font-semibold text-steel">{{ t("product.sizeLabel") }}</legend>
+    <div class="flex flex-wrap gap-2">
+      <button
+        v-for="variant in props.variants"
+        :key="variant.id"
+        type="button"
+        :disabled="variant.stock <= 0"
+        :aria-pressed="model === variant.id"
+        :title="variant.stock <= 0 ? t('product.sizeSoldOut') : undefined"
+        class="font-display-tight min-h-11 min-w-14 rounded-md border px-4 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:text-muted/50 disabled:line-through"
+        :class="model === variant.id ? 'border-accent bg-accent text-black' : 'border-edge text-steel hover:border-accent'"
+        @click="model = variant.id"
+      >
+        {{ variant.label }}
+      </button>
+    </div>
+  </fieldset>
+</template>

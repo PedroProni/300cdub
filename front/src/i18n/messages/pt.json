@@ -1,0 +1,246 @@
+{
+  "brand": {
+    "name": "300c.dub"
+  },
+  "language": {
+    "label": "Idioma",
+    "pt": "PT",
+    "en": "EN"
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "retry": "Tentar de novo",
+    "save": "Salvar",
+    "dragToReorder": "Arraste para mudar a ordem"
+  },
+  "nav": {
+    "main": "Navegação principal",
+    "admin": "Navegação do painel",
+    "catalog": "Catálogo",
+    "products": "Produtos",
+    "categories": "Categorias",
+    "settings": "Configurações",
+    "skip": "Ir para o conteúdo"
+  },
+  "stock": {
+    "inStock": "Em estoque",
+    "lastUnits": "Últimas unidades",
+    "soldOut": "Esgotado"
+  },
+  "footer": {
+    "tagline": "Vivendo na fast lane: potência, velocidade e liberdade sobre rodas!",
+    "instagram": "Siga no Instagram"
+  },
+  "home": {
+    "metaTitle": "300c.dub | Vitrine de produtos",
+    "metaDescription": "Camisetas e itens de coleção da página 300c.dub. Escolha sua peça e fale com a gente pelo WhatsApp ou Instagram.",
+    "badge": "Vitrine oficial",
+    "subtitle": "Vivendo na fast lane: potência, velocidade e liberdade sobre rodas!",
+    "cta": "Ver catálogo",
+    "featuredTitle": "Destaques",
+    "featuredEmptyTitle": "Em breve, novidades por aqui",
+    "featuredEmptyDescription": "Ainda não há produtos em destaque. Dê uma olhada no catálogo completo."
+  },
+  "catalog": {
+    "title": "Catálogo",
+    "metaTitle": "Catálogo | 300c.dub",
+    "metaDescription": "Todas as peças e itens de coleção da 300c.dub.",
+    "categories": "Categorias",
+    "allCategories": "Todos",
+    "search": "Buscar",
+    "searchPlaceholder": "Nome do produto",
+    "sortLabel": "Ordenar por",
+    "sort": {
+      "manual": "Destaques da loja",
+      "newest": "Mais recentes",
+      "priceAsc": "Menor preço",
+      "priceDesc": "Maior preço"
+    },
+    "results": "{count} produtos",
+    "noImage": "Sem foto",
+    "clearFilters": "Limpar filtros",
+    "loadFailed": "Não foi possível carregar os produtos agora. Tente de novo em instantes.",
+    "empty": {
+      "title": "Nenhum produto encontrado",
+      "description": "Tente outra busca ou outra categoria."
+    },
+    "loadMore": "Carregar mais produtos",
+    "loadMoreFailed": "Não foi possível carregar mais produtos. Tente novamente.",
+    "loadingMore": "Carregando mais produtos"
+  },
+  "product": {
+    "sizeLabel": "Tamanho",
+    "sizeSoldOut": "Esgotado neste tamanho",
+    "discount": "{percent}% OFF",
+    "share": "Compartilhar",
+    "linkCopied": "Link copiado!",
+    "cta": {
+      "want": "Quero este",
+      "soldOut": "Esgotado",
+      "chooseSize": "Escolha um tamanho para continuar."
+    },
+    "gallery": {
+      "previous": "Foto anterior",
+      "next": "Próxima foto",
+      "show": "Mostrar foto {number}"
+    },
+    "notFound": {
+      "title": "Produto não encontrado",
+      "description": "Este produto não está mais disponível ou o link está incorreto.",
+      "back": "Ver catálogo"
+    }
+  },
+  "contact": {
+    "title": "Falar com a gente",
+    "back": "Voltar ao produto",
+    "size": "Tamanho: {size}",
+    "messageLabel": "Sua mensagem",
+    "messageHint": "Você pode editar o texto antes de enviar.",
+    "message": {
+      "withSize": "Oi! Tenho interesse na peça {product} (tamanho {size}). Link: {link}",
+      "withoutSize": "Oi! Tenho interesse na peça {product}. Link: {link}"
+    },
+    "whatsapp": "Chamar no WhatsApp",
+    "instagram": {
+      "button": "Chamar no Instagram",
+      "preHint": "No Instagram, a mensagem é copiada e você só precisa colar na conversa.",
+      "copiedHint": "Mensagem copiada! Cole na conversa do Instagram que acabou de abrir.",
+      "copiedToast": "Mensagem copiada. Cole na conversa.",
+      "copyFailed": "Não foi possível copiar a mensagem. Copie o texto manualmente."
+    }
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "O endereço que você acessou não existe.",
+    "back": "Voltar ao início"
+  },
+  "errors": {
+    "generic": "Algo deu errado. Tente novamente.",
+    "network": "Sem conexão com o servidor. Verifique sua internet.",
+    "unauthorized": "Sua sessão expirou. Entre novamente.",
+    "validation": "Confira os dados informados.",
+    "notFound": "Item não encontrado.",
+    "tooManyRequests": "Muitas tentativas. Aguarde um pouco e tente de novo.",
+    "invalidCredentials": "E-mail ou senha incorretos.",
+    "wrongPassword": "A senha atual está incorreta.",
+    "weakPassword": "A nova senha é muito fraca.",
+    "fileType": "Use uma imagem JPG, PNG ou WEBP.",
+    "fileTooLarge": "A imagem é grande demais (máximo de 5 MB).",
+    "categoryInUse": "Esta categoria ainda tem produtos.",
+    "imageCorrupt": "Não foi possível ler a imagem. Tente outro arquivo.",
+    "imageLimit": "Este produto já tem o máximo de 10 fotos.",
+    "samePassword": "A nova senha precisa ser diferente da atual."
+  },
+  "auth": {
+    "logout": "Sair",
+    "login": {
+      "title": "Entrar no painel",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Entrar"
+    },
+    "changePassword": {
+      "open": "Trocar minha senha",
+      "title": "Trocar minha senha",
+      "current": "Senha atual",
+      "new": "Nova senha",
+      "confirm": "Repita a nova senha",
+      "tooShort": "Use pelo menos {min} caracteres.",
+      "mismatch": "As senhas não são iguais.",
+      "success": "Senha alterada com sucesso."
+    }
+  },
+  "admin": {
+    "title": "Painel 300c.dub",
+    "products": {
+      "new": "Novo produto",
+      "newTitle": "Novo produto",
+      "editTitle": "Editar produto",
+      "back": "Voltar para a lista",
+      "search": "Buscar produto",
+      "noResults": "Nenhum produto com esse nome.",
+      "reorderDisabled": "Limpe a busca para mudar a ordem dos produtos.",
+      "visible": "Visível na vitrine",
+      "featured": "Destaque",
+      "name": "Nome",
+      "description": "Descrição",
+      "category": "Categoria",
+      "noCategory": "Sem categoria",
+      "price": "Preço (R$)",
+      "promoPrice": "Preço promocional (R$)",
+      "promoHint": "Deixe vazio se não houver promoção.",
+      "saved": "Produto salvo.",
+      "created": "Produto criado. Agora você pode adicionar as fotos.",
+      "deleted": "Produto excluído.",
+      "reordered": "Ordem atualizada.",
+      "deleteTitle": "Excluir produto?",
+      "deleteMessage": "O produto {name} será removido da vitrine. Essa ação não pode ser desfeita.",
+      "empty": {
+        "title": "Nenhum produto ainda",
+        "description": "Cadastre o primeiro produto para ele aparecer na vitrine."
+      },
+      "errors": {
+        "name": "Informe o nome do produto.",
+        "price": "Informe um preço maior que zero.",
+        "promoPrice": "O preço promocional precisa ser menor que o preço normal.",
+        "variantLabel": "Preencha o nome de todos os tamanhos.",
+        "variantDuplicate": "Há tamanhos repetidos.",
+        "variantStock": "O estoque deve ser um número inteiro, zero ou mais."
+      },
+      "variants": {
+        "title": "Tamanhos e estoque",
+        "help": "Adicione um tamanho para cada opção. Se o produto não tem tamanho, deixe a lista vazia.",
+        "label": "Tamanho",
+        "stock": "Estoque",
+        "add": "Adicionar tamanho",
+        "remove": "Remover tamanho"
+      }
+    },
+    "images": {
+      "title": "Fotos",
+      "help": "A primeira foto é a capa. Arraste para mudar a ordem ou use a estrela para escolher a capa.",
+      "upload": "Enviar fotos",
+      "empty": "Este produto ainda não tem fotos.",
+      "cover": "Capa",
+      "makeCover": "Usar como capa",
+      "saveFirst": "Salve o produto para poder adicionar fotos.",
+      "uploaded": "Foto enviada.",
+      "deleted": "Foto excluída.",
+      "reordered": "Ordem das fotos atualizada.",
+      "coverChanged": "Capa atualizada.",
+      "deleteTitle": "Excluir foto?",
+      "deleteMessage": "A foto será removida do produto."
+    },
+    "categories": {
+      "newLabel": "Nome da categoria",
+      "add": "Adicionar categoria",
+      "nameError": "Informe um nome com pelo menos 2 letras.",
+      "created": "Categoria criada.",
+      "saved": "Categoria salva.",
+      "deleted": "Categoria excluída.",
+      "reordered": "Ordem das categorias atualizada.",
+      "deleteTitle": "Excluir categoria?",
+      "deleteMessage": "A categoria {name} será removida. Essa ação não pode ser desfeita.",
+      "empty": {
+        "title": "Nenhuma categoria ainda",
+        "description": "Crie categorias como Camisetas ou Colecionáveis para organizar a vitrine."
+      }
+    },
+    "settings": {
+      "instagram": "Usuário do Instagram",
+      "instagramHint": "Só o nome do perfil, sem o endereço completo.",
+      "whatsapp": "Número do WhatsApp",
+      "whatsappHint": "Com código do país e DDD, por exemplo 5511999999999.",
+      "template": "Mensagem padrão",
+      "templateHint": "Use {product} para o nome da peça e {size} para o tamanho.",
+      "preview": "Prévia da mensagem",
+      "previewProduct": "Camiseta exemplo",
+      "previewSize": "M",
+      "saved": "Configurações salvas.",
+      "handleError": "Informe o usuário do Instagram.",
+      "whatsappError": "Informe um número de WhatsApp válido, com DDD."
+    }
+  }
+}
