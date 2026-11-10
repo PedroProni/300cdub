@@ -1,223 +1,70 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 300c.dub API
 
-<h1 align="center">300cdub API</h1>
+NestJS 11 + MongoDB API for the 300c.dub showroom: public read-only catalog, a single-admin backoffice API, image upload to S3-compatible storage, and a link-preview page for social sharing.
 
-<p align="center">
-  A robust NestJS API for product management with MongoDB integration, built using Clean Architecture and Domain-Driven Design (DDD) principles.
-</p>
+## Features
 
-<p align="center">
-  <a href="https://nodejs.org/" target="_blank"><img src="https://img.shields.io/badge/Node.js-20+-green.svg" alt="Node.js Version" /></a>
-  <a href="https://nestjs.com/" target="_blank"><img src="https://img.shields.io/badge/NestJS-11.0+-red.svg" alt="NestJS Version" /></a>
-  <a href="https://www.mongodb.com/" target="_blank"><img src="https://img.shields.io/badge/MongoDB-8.0+-green.svg" alt="MongoDB Version" /></a>
-  <a href="https://www.typescriptlang.org/" target="_blank"><img src="https://img.shields.io/badge/TypeScript-5.7+-blue.svg" alt="TypeScript Version" /></a>
-</p>
+- Public catalog: visible products only, categories, filters (category, featured, search, sort), pagination, slugs.
+- Backoffice (one admin, httpOnly SameSite=Strict session cookie): products with variants and stock, promotional price, visibility, featured, manual ordering; categories with ordering; contact settings; change password.
+- Images: JPEG, PNG or WebP up to 5 MB, magic-byte check, decoded and re-encoded with sharp into thumb, medium and large WebP variants, up to 10 per product, reorder and cover choice.
+- Derived stock badge: `sold_out` (0), `last_units` (up to 3), `in_stock`.
+- Share page `GET /p/:slug`: Open Graph and Twitter tags (title with price, description, cover) for WhatsApp and Instagram crawlers; browsers are redirected to the web app at `/produto/:slug`.
+- Security: default-deny auth guard (`@Public()` opts routes out), Origin check on writes, login limited to 5 attempts per minute per IP, whitelist and forbid-unknown validation, bounded page sizes, helmet, escaped HTML on the share page.
 
-## 📋 Description
-
-The 300cdub-API is a comprehensive product management system built with NestJS and MongoDB. It follows Clean Architecture principles with Domain-Driven Design (DDD) to ensure maintainability, testability, and scalability. The API provides complete CRUD operations for products with associated images, robust authentication, and comprehensive security measures.
-
-## 🏗️ Architecture
-
-- **Clean Architecture** with Domain-Driven Design (DDD)
-- **Layered Architecture**: Domain, Application, Infrastructure, and Presentation
-- **Repository Pattern** for data abstraction
-- **Command Pattern** for business operations
-- **Mapper Pattern** for data transformation between layers
-
-### 📁 Project Structure
+## Layout
 
 ```
 src/
-├── application/           # Application layer (Use Cases, Commands, Mappers)
-│   ├── commands/         # Command objects
-│   ├── mappers/          # Application-level mappers
-│   └── use-cases/        # Business use cases
-├── common/               # Shared utilities and configurations
-│   ├── env/              # Environment configuration
-│   └── helpers/          # Helper functions and utilities
-├── domain/               # Domain layer (Entities, Repositories, Business Logic)
-│   ├── entities/         # Domain entities
-│   ├── mappers/          # Domain-level mappers
-│   ├── repositories/     # Repository interfaces
-│   └── tokens/           # Dependency injection tokens
-├── infrastructure/       # Infrastructure layer (Database, External Services)
-│   ├── auth/             # Authentication services
-│   ├── database/         # Database configurations and persistence
-│   ├── documentation/    # API documentation setup
-│   ├── health/           # Health check endpoints
-│   └── http-security/    # Security configurations
-├── presentation/         # Presentation layer (Controllers, DTOs)
-│   └── controllers/      # API controllers
-└── shared/               # Shared DTOs and interfaces
-    ├── dtos/             # Data Transfer Objects
-    └── interfaces/       # Shared interfaces
+  domain/          constants, enums and types (one context per file)
+  common/          env service, helpers, pipes
+  application/     services and mappers
+  infrastructure/  database (schemas, repositories), storage (S3, sharp), security
+  presentation/    controllers, DTOs, exception filter
+test/              e2e suites (real MongoDB and S3-compatible storage)
 ```
 
-## 🚀 Features
-
-- ✅ **Complete Product Management** - CRUD operations for products
-- ✅ **Image Management** - Multiple images per product with positioning
-- ✅ **Pagination Support** - Efficient data retrieval with pagination
-- ✅ **Advanced Filtering** - Filter products by ID or other criteria
-- ✅ **Token-based Authentication** - Secure API access
-- ✅ **Input Validation** - Robust data validation with class-validator
-- ✅ **API Documentation** - Comprehensive Swagger/OpenAPI documentation
-- ✅ **Health Checks** - Application and database health monitoring
-- ✅ **Security Headers** - Helmet, CORS, CSRF protection
-- ✅ **Error Handling** - Structured error responses
-- ✅ **Docker Support** - Containerized deployment
-
-## 🛠️ Technologies
-
-- **Framework**: NestJS 11.0+
-- **Database**: MongoDB with Mongoose ODM
-- **Language**: TypeScript 5.7+
-- **Validation**: class-validator & class-transformer
-- **Documentation**: Swagger/OpenAPI
-- **Security**: Helmet, CORS, CSRF protection
-- **Health Checks**: @nestjs/terminus
-- **Authentication**: Token-based authentication
-- **Testing**: Jest
-- **Code Quality**: ESLint, Prettier
-
-## 📦 Installation
-
-### Prerequisites
-
-- Node.js 20+
-- MongoDB 8.0+
-- npm or yarn
-
-### Setup
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/pedro-proni/300cdub-api.git
-   cd 300cdub-api/application
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Environment Configuration**
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Update the `.env` file with your configuration:
-
-   ```env
-   # Database
-   MONGODB_URI=mongodb://localhost:27017/300cdub
-
-   # Authentication
-   AUTH_TOKEN=your-secret-token-here
-
-   # CORS Configuration
-   LOCAL_DOMAIN=http://localhost:3000
-   PROD_DOMAIN=https://your-production-domain.com
-
-   # Application
-   PORT=3000
-   NODE_ENV=development
-   ```
-
-## 🚀 Running the Application
+## Run locally
 
 ```bash
-# Development mode
+cp .env.example .env
+npm ci
 npm run start:dev
-
-# Production mode
-npm run start:prod
-
-# Debug mode
-npm run start:debug
 ```
 
-The API will be available at `http://localhost:3000`
+Swagger is served at `/docs` when `SWAGGER_ENABLED` is not `false`. All JSON routes live under `/api`. The first admin is created from `ADMIN_EMAIL` and `ADMIN_PASSWORD` when no admin exists; later changes to those variables do nothing, use the change password route.
 
-## 📖 API Documentation
+## Object storage (MinIO by default, Cloudflare R2 optional)
 
-Once the application is running, visit:
+The same code runs on both through environment variables only. Everything works with MinIO and no paid service; R2 is only an option for anyone who already has it (enabling R2 asks for a payment method on the Cloudflare account).
 
-- **Swagger UI**: `http://localhost:3000/api`
-- **Health Check**: `http://localhost:3000/health`
+| Variable | MinIO (local) | Cloudflare R2 |
+| --- | --- | --- |
+| `S3_ENDPOINT` | `http://localhost:9000` | `https://<account-id>.r2.cloudflarestorage.com` |
+| `S3_REGION` | `auto` | `auto` |
+| `S3_FORCE_PATH_STYLE` | `true` | `false` |
+| `S3_BUCKET` | `cdub-images` | your bucket |
+| `S3_PUBLIC_BASE_URL` | `http://localhost:9000/cdub-images` | the bucket public `r2.dev` URL or a custom domain |
 
-### 🔗 Main Endpoints
+On start the API creates the bucket and a public-read policy when the bucket is missing (works on MinIO). R2 does not accept bucket policies through the S3 API: create the bucket and enable public access (or a custom domain) in the Cloudflare dashboard, then create an R2 API token with object read and write and use its keys as `S3_ACCESS_KEY_ID` and `S3_SECRET_ACCESS_KEY`. Variants are stored as immutable WebP with a one year cache header.
 
-| Method   | Endpoint           | Description                  |
-| -------- | ------------------ | ---------------------------- |
-| `POST`   | `/product`         | Create a new product         |
-| `GET`    | `/product`         | Get products with pagination |
-| `GET`    | `/product?id={id}` | Get product by ID            |
-| `PUT`    | `/product/{id}`    | Update an existing product   |
-| `DELETE` | `/product/{id}`    | Delete a product             |
-| `GET`    | `/health`          | Health check endpoint        |
-
-## 🧪 Testing
-
-### 🐳 Run with Docker Compose (Recommended)
-
-```yaml
-version: "3.8"
-services:
-  api:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/300cdub
-      - AUTH_TOKEN=your-token-here
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:8.0
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-
-volumes:
-  mongodb_data:
-```
-
-To start the services, run:
+## Tests
 
 ```bash
-docker-compose up
+npm test
+npm run test:e2e
 ```
 
-## 🔒 Security Features
+The e2e suites need MongoDB and an S3-compatible server. Defaults are `mongodb://localhost:57001` and `http://localhost:57003` with the keys `cdubminio` / `cdubminio-secret`; override with `E2E_MONGO_URI`, `E2E_S3_ENDPOINT`, `E2E_S3_ACCESS_KEY` and `E2E_S3_SECRET_KEY`. Each run uses its own database and bucket.
 
-- **Helmet**: Security headers configuration
-- **CORS**: Cross-origin resource sharing protection
-- **CSRF**: Cross-site request forgery protection
-- **Input Validation**: Strict input validation and sanitization
-- **Authentication**: Token-based API authentication
-- **Rate Limiting**: Configurable rate limiting (can be added)
+## Main routes
 
-## 👨‍💻 Author
+| Route | Auth | Purpose |
+| --- | --- | --- |
+| `GET /api/public/products`, `/api/public/products/:slug`, `/api/public/categories`, `/api/public/settings` | public | showroom data |
+| `GET /p/:slug` | public | share page with Open Graph tags |
+| `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`, `PUT /api/auth/password` | login public | session |
+| `/api/admin/products` (+ `/:id/images`, `/reorder`) | admin | products and images |
+| `/api/admin/categories` (+ `/reorder`) | admin | categories |
+| `GET`/`PUT /api/admin/settings` | admin | Instagram handle, WhatsApp number, message template |
 
-- **Pedro Proni** - [GitHub Profile](https://github.com/pedro-proni)
-
-## 📞 Support
-
-For support and questions:
-
-- 📧 Create an issue on GitHub
-- 📖 Check the [API Documentation](http://localhost:3000/api)
-- 🔍 Review the project structure and code examples
-
----
-
-<p align="center">Made with ❤️ using NestJS and TypeScript</p>
+Errors are `{ statusCode, code, message }` with a stable `code` the front maps to translated text.

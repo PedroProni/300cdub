@@ -1,34 +1,23 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import { Image } from '@infrastructure/database/schemas/image.schema';
+import { HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose';
+import { ProductImage, ProductImageSchema } from '@infrastructure/database/schemas/product-image.schema';
+import { ProductVariant, ProductVariantSchema } from '@infrastructure/database/schemas/product-variant.schema';
 
-export type ProductDocument = Product & Document;
-
-@Schema({ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }, versionKey: false, collection: 'product' })
+@Schema({ collection: 'products', timestamps: true })
 export class Product {
-    @Prop({ required: true })
-    _id!: string;
-
-    @Prop({ required: true })
-    name!: string;
-
-    @Prop({ required: true })
-    description!: string;
-
-    @Prop({ required: true })
-    price!: number;
-
-    @Prop({ required: true })
-    category!: string;
-
-    @Prop({ required: true })
-    images!: Image[];
-
-    @Prop({ required: true })
-    created_at!: Date;
-
-    @Prop({ required: true })
-    updated_at!: Date;
+  @Prop({ required: true, trim: true }) name!: string;
+  @Prop({ required: true, unique: true }) slug!: string;
+  @Prop({ default: '' }) description!: string;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Category', default: null, index: true }) categoryId!: Types.ObjectId | null;
+  @Prop({ required: true, min: 0 }) price!: number;
+  @Prop({ type: Number, default: null }) promoPrice!: number | null;
+  @Prop({ type: [ProductImageSchema], default: [] }) images!: ProductImage[];
+  @Prop({ type: [ProductVariantSchema], default: [] }) variants!: ProductVariant[];
+  @Prop({ default: false, index: true }) visible!: boolean;
+  @Prop({ default: false, index: true }) featured!: boolean;
+  @Prop({ default: 0, index: true }) sortOrder!: number;
+  createdAt!: Date;
 }
 
+export type ProductDocument = HydratedDocument<Product>;
 export const ProductSchema = SchemaFactory.createForClass(Product);

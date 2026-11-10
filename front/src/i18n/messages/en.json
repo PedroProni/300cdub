@@ -1,0 +1,264 @@
+{
+  "brand": {
+    "name": "300c.dub"
+  },
+  "language": {
+    "label": "Language",
+    "pt": "PT",
+    "en": "EN"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "retry": "Try again",
+    "save": "Save",
+    "dragToReorder": "Drag to change the order"
+  },
+  "nav": {
+    "main": "Main navigation",
+    "admin": "Panel navigation",
+    "catalog": "Catalog",
+    "products": "Products",
+    "categories": "Categories",
+    "settings": "Settings",
+    "skip": "Skip to content"
+  },
+  "stock": {
+    "inStock": "In stock",
+    "lastUnits": "Last units",
+    "soldOut": "Sold out"
+  },
+  "footer": {
+    "tagline": "Living in the fast lane: power, speed and freedom on wheels!",
+    "instagram": "Follow on Instagram",
+    "credits": "Image credits"
+  },
+  "home": {
+    "metaTitle": "300c.dub | Product showroom",
+    "metaDescription": "T-shirts and collectibles from the 300c.dub page. Pick your piece and message us on WhatsApp or Instagram.",
+    "badge": "Official showroom",
+    "subtitle": "Living in the fast lane: power, speed and freedom on wheels!",
+    "cta": "Browse catalog",
+    "featuredTitle": "Featured",
+    "featuredEmptyTitle": "New things coming soon",
+    "featuredEmptyDescription": "There are no featured products yet. Take a look at the full catalog.",
+    "ctaSecondary": "See featured",
+    "viewAll": "View all",
+    "viewAllTile": "View the full catalog",
+    "hero": {
+      "line1": "Power",
+      "line2": "Speed",
+      "line3": "Freedom",
+      "pick": "Featured piece"
+    },
+    "marquee": {
+      "lane": "Living in the fast lane",
+      "power": "Power",
+      "speed": "Speed",
+      "freedom": "Freedom"
+    }
+  },
+  "catalog": {
+    "title": "Catalog",
+    "metaTitle": "Catalog | 300c.dub",
+    "metaDescription": "All the pieces and collectibles from 300c.dub.",
+    "categories": "Categories",
+    "allCategories": "All",
+    "search": "Search",
+    "searchPlaceholder": "Product name",
+    "sortLabel": "Sort by",
+    "sort": {
+      "manual": "Store picks",
+      "newest": "Newest",
+      "priceAsc": "Lowest price",
+      "priceDesc": "Highest price"
+    },
+    "results": "{count} products",
+    "noImage": "No photo",
+    "clearFilters": "Clear filters",
+    "loadFailed": "We could not load the products right now. Please try again shortly.",
+    "empty": {
+      "title": "No products found",
+      "description": "Try another search or another category."
+    },
+    "loadMore": "Load more products",
+    "loadMoreFailed": "Could not load more products. Try again.",
+    "loadingMore": "Loading more products"
+  },
+  "product": {
+    "sizeLabel": "Size",
+    "sizeSingle": "Size: {size}",
+    "sizeSoldOut": "Sold out in this size",
+    "discount": "{percent}% OFF",
+    "share": "Share",
+    "linkCopied": "Link copied!",
+    "cta": {
+      "want": "I want this",
+      "soldOut": "Sold out",
+      "chooseSize": "Choose a size to continue."
+    },
+    "gallery": {
+      "previous": "Previous photo",
+      "next": "Next photo",
+      "show": "Show photo {number}"
+    },
+    "notFound": {
+      "title": "Product not found",
+      "description": "This product is no longer available or the link is wrong.",
+      "back": "Browse catalog"
+    }
+  },
+  "contact": {
+    "title": "Get in touch",
+    "back": "Back to product",
+    "size": "Size: {size}",
+    "messageLabel": "Your message",
+    "messageHint": "You can edit the text before sending.",
+    "message": {
+      "withSize": "Hi! I am interested in {product} (size {size}). Link: {link}",
+      "withoutSize": "Hi! I am interested in {product}. Link: {link}"
+    },
+    "whatsapp": "Message on WhatsApp",
+    "instagram": {
+      "button": "Message on Instagram",
+      "preHint": "On Instagram the message is copied and you just paste it into the chat.",
+      "copiedHint": "Message copied! Paste it into the Instagram chat that just opened.",
+      "copiedToast": "Message copied. Paste it into the chat.",
+      "copyFailed": "We could not copy the message. Please copy the text manually."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The address you visited does not exist.",
+    "back": "Back to home"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Cannot reach the server. Check your internet connection.",
+    "unauthorized": "Your session has expired. Please sign in again.",
+    "validation": "Please check the information provided.",
+    "notFound": "Item not found.",
+    "tooManyRequests": "Too many attempts. Wait a moment and try again.",
+    "invalidCredentials": "Wrong e-mail or password.",
+    "wrongPassword": "The current password is incorrect.",
+    "weakPassword": "The new password is too weak.",
+    "fileType": "Use a JPG, PNG or WEBP image.",
+    "fileTooLarge": "The image is too large (5 MB maximum).",
+    "categoryInUse": "This category still has products.",
+    "imageCorrupt": "The image could not be read. Try another file.",
+    "imageLimit": "This product already has the maximum of 10 photos.",
+    "samePassword": "The new password must differ from the current one."
+  },
+  "auth": {
+    "logout": "Sign out",
+    "login": {
+      "title": "Sign in to the panel",
+      "email": "E-mail",
+      "password": "Password",
+      "submit": "Sign in"
+    },
+    "changePassword": {
+      "open": "Change my password",
+      "title": "Change my password",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Repeat the new password",
+      "tooShort": "Use at least {min} characters.",
+      "mismatch": "The passwords do not match.",
+      "success": "Password changed successfully."
+    }
+  },
+  "admin": {
+    "title": "300c.dub Panel",
+    "products": {
+      "new": "New product",
+      "newTitle": "New product",
+      "editTitle": "Edit product",
+      "back": "Back to the list",
+      "search": "Search product",
+      "searchPlaceholder": "Type the product name",
+      "noResults": "No product with that name.",
+      "reorderDisabled": "Clear the search to change the product order.",
+      "visible": "Visible in the showroom",
+      "featured": "Featured",
+      "name": "Name",
+      "description": "Description",
+      "category": "Category",
+      "noCategory": "No category",
+      "price": "Price (BRL)",
+      "promoPrice": "Promotional price (BRL)",
+      "promoHint": "Leave empty if there is no promotion.",
+      "saved": "Product saved.",
+      "created": "Product created. You can now add the photos.",
+      "deleted": "Product deleted.",
+      "reordered": "Order updated.",
+      "deleteTitle": "Delete product?",
+      "deleteMessage": "The product {name} will be removed from the showroom. This cannot be undone.",
+      "empty": {
+        "title": "No products yet",
+        "description": "Add the first product so it shows up in the showroom."
+      },
+      "errors": {
+        "name": "Enter the product name.",
+        "price": "Enter a price greater than zero.",
+        "promoPrice": "The promotional price must be lower than the regular price.",
+        "variantLabel": "Fill in the name of every size.",
+        "variantDuplicate": "Some sizes are repeated.",
+        "variantStock": "Stock must be a whole number, zero or more."
+      },
+      "variants": {
+        "title": "Sizes and stock",
+        "help": "Add one entry per size. If the product has no sizes, leave the list empty.",
+        "label": "Size",
+        "stock": "Stock",
+        "add": "Add size",
+        "remove": "Remove size"
+      }
+    },
+    "images": {
+      "title": "Photos",
+      "help": "The first photo is the cover. Drag to change the order or use the star to pick the cover.",
+      "upload": "Upload photos",
+      "empty": "This product has no photos yet.",
+      "cover": "Cover",
+      "makeCover": "Use as cover",
+      "saveFirst": "Save the product to be able to add photos.",
+      "uploaded": "Photo uploaded.",
+      "deleted": "Photo deleted.",
+      "reordered": "Photo order updated.",
+      "coverChanged": "Cover updated.",
+      "deleteTitle": "Delete photo?",
+      "deleteMessage": "The photo will be removed from the product."
+    },
+    "categories": {
+      "newLabel": "Category name",
+      "add": "Add category",
+      "nameError": "Enter a name with at least 2 letters.",
+      "created": "Category created.",
+      "saved": "Category saved.",
+      "deleted": "Category deleted.",
+      "reordered": "Category order updated.",
+      "deleteTitle": "Delete category?",
+      "deleteMessage": "The category {name} will be removed. This cannot be undone.",
+      "empty": {
+        "title": "No categories yet",
+        "description": "Create categories such as T-shirts or Collectibles to organize the showroom."
+      }
+    },
+    "settings": {
+      "instagram": "Instagram username",
+      "instagramHint": "Only the profile name, not the full address.",
+      "whatsapp": "WhatsApp number",
+      "whatsappHint": "With country code and area code, for example 5511999999999.",
+      "template": "Default message",
+      "templateHint": "Use {product} for the piece name and {size} for the size.",
+      "preview": "Message preview",
+      "previewProduct": "Sample T-shirt",
+      "previewSize": "M",
+      "saved": "Settings saved.",
+      "handleError": "Enter the Instagram username.",
+      "whatsappError": "Enter a valid WhatsApp number with area code."
+    }
+  }
+}

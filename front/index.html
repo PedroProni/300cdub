@@ -1,10 +1,39 @@
 <!doctype html>
-<html lang="">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
     <title>300c.dub</title>
+    <script>
+      (function () {
+        var api = "%VITE_API_URL%";
+        var match = /^\/produto\/([^/]+)\/?$/.exec(location.pathname);
+        if (!match || api.charAt(0) === "%") return;
+        var request = fetch(api.replace(/\/$/, "") + "/public/products/" + match[1], { headers: { Accept: "application/json" }, credentials: "include" }).catch(function () {
+          return null;
+        });
+        window.__earlyProduct = { slug: decodeURIComponent(match[1]), promise: request };
+        request
+          .then(function (response) {
+            return response && response.ok ? response.clone().json() : null;
+          })
+          .then(function (product) {
+            var urls = product && product.images && product.images[0] && product.images[0].urls;
+            if (!urls) return;
+            var link = document.createElement("link");
+            link.rel = "preload";
+            link.as = "image";
+            link.href = urls.large;
+            link.setAttribute("imagesrcset", urls.thumb + " 240w, " + urls.medium + " 720w, " + urls.large + " 1600w");
+            link.setAttribute("imagesizes", "(min-width: 768px) 560px, 100vw");
+            link.setAttribute("fetchpriority", "high");
+            document.head.appendChild(link);
+          })
+          .catch(function () {});
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>

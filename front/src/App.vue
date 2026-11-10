@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView } from "vue-router";
+import ToastHost from "@/components/ui/ToastHost.vue";
+import ConfirmHost from "@/components/ui/ConfirmHost.vue";
 </script>
 
 <template>
-    <RouterView />
+  <RouterView />
+  <ToastHost />
+  <ConfirmHost />
 </template>
-
-<style scoped></style>
