@@ -6,8 +6,10 @@ export const MARQUEE_COPIES = [0, 1];
 
 export const HERO_IMAGE_SIZES = "(min-width: 1024px) 480px, 100vw";
 
-export const HERO_BACKDROP_WIDTH = 1600;
+export const HERO_PHOTO_WIDTH = 1080;
 
-export const HERO_BACKDROP_HEIGHT = 800;
+export const HERO_PHOTO_HEIGHT = 1440;
+
+export const HERO_PHOTO_SIZES = "(min-width: 1024px) 60vw, 100vw";
 
 export const HERO_PICK_COUNT = 2;

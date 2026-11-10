@@ -42,30 +42,30 @@ function openCategory(slug: string): void {
   <div class="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden" data-testid="hero">
     <HeroBackdrop />
     <div class="relative mx-auto max-w-7xl px-4">
-    <section class="grid gap-8 pb-8 pt-10 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-16 lg:pt-14">
-      <div class="flex flex-col gap-6 lg:col-span-7">
-        <p class="micro-label hero-fade flex items-center gap-2" style="--line: 0"><span class="size-2 bg-accent" aria-hidden="true" />{{ t("home.badge") }}</p>
-        <h1 class="hero-title text-[3.75rem] text-steel sm:text-[8rem] lg:text-[9.5rem]">
-          <span class="sr-only">{{ t("brand.name") }}</span>
-          <span v-for="(key, index) in HERO_LINE_KEYS" :key="key" class="hero-line" aria-hidden="true"
-            ><span :style="{ '--line': index + 1 }" :class="index === HERO_LINE_KEYS.length - 1 ? 'text-accent' : ''">{{ t(key) }}</span></span
-          >
-        </h1>
-        <p class="hero-fade max-w-md text-sm text-muted" style="--line: 4">{{ t("home.subtitle") }}</p>
-        <div class="hero-fade flex flex-wrap gap-3" style="--line: 5">
-          <RouterLink
-            :to="{ name: ROUTE_NAMES.catalog }"
-            class="font-display-tight inline-flex min-h-12 items-center rounded-sm border border-accent-fill bg-accent-fill px-8 text-lg font-bold text-black transition-colors hover:border-accent hover:bg-accent"
-            >{{ t("home.cta") }}</RouterLink
-          >
-          <a
-            href="#destaques"
-            class="font-display-tight inline-flex min-h-12 items-center rounded-sm border border-edge px-8 text-lg font-bold text-steel transition-colors hover:border-accent hover:text-accent"
-            >{{ t("home.ctaSecondary") }}</a
-          >
+      <section class="grid gap-8 pb-8 pt-10 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-16 lg:pt-14">
+        <div class="flex flex-col gap-6 lg:col-span-7">
+          <p class="micro-label hero-fade flex items-center gap-2" style="--line: 0"><span class="size-2 bg-accent" aria-hidden="true" />{{ t("home.badge") }}</p>
+          <h1 class="hero-title text-[3.75rem] text-steel sm:text-[8rem] lg:text-[9.5rem]">
+            <span class="sr-only">{{ t("brand.name") }}</span>
+            <span v-for="(key, index) in HERO_LINE_KEYS" :key="key" class="hero-line" aria-hidden="true"
+              ><span :style="{ '--line': index + 1 }" :class="index === HERO_LINE_KEYS.length - 1 ? 'text-accent' : ''">{{ t(key) }}</span></span
+            >
+          </h1>
+          <p class="hero-fade max-w-md text-sm text-muted" style="--line: 4">{{ t("home.subtitle") }}</p>
+          <div class="hero-fade flex flex-wrap gap-3" style="--line: 5">
+            <RouterLink
+              :to="{ name: ROUTE_NAMES.catalog }"
+              class="font-display-tight inline-flex min-h-12 items-center rounded-sm border border-accent-fill bg-accent-fill px-8 text-lg font-bold text-black transition-colors hover:border-accent hover:bg-accent"
+              >{{ t("home.cta") }}</RouterLink
+            >
+            <a
+              href="#destaques"
+              class="font-display-tight inline-flex min-h-12 items-center rounded-sm border border-edge px-8 text-lg font-bold text-steel transition-colors hover:border-accent hover:text-accent"
+              >{{ t("home.ctaSecondary") }}</a
+            >
+          </div>
         </div>
-      </div>
-      <div class="hero-fade lg:col-span-5" style="--line: 3"><HeroImage :product="heroProduct" :loaded="loaded" /></div>
+        <div class="hero-fade lg:col-span-5 lg:w-72 lg:justify-self-end lg:self-start" style="--line: 3"><HeroImage :product="heroProduct" :loaded="loaded" /></div>
       </section>
       <ul v-if="heroPicks.length > 0" class="grid grid-cols-2 gap-3 pb-8 lg:hidden" data-testid="hero-picks">
         <li v-for="product in heroPicks" :key="product.id">
@@ -96,7 +96,9 @@ function openCategory(slug: string): void {
   <section id="destaques" class="mt-14 scroll-mt-20" :aria-label="t('home.featuredTitle')">
     <div class="mb-6 flex items-end justify-between gap-4">
       <h2 class="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-steel">{{ t("home.featuredTitle") }}</h2>
-      <RouterLink :to="{ name: ROUTE_NAMES.catalog }" class="micro-label text-accent inline-flex min-h-11 items-center border-b border-accent/40 hover:border-accent">{{ t("home.viewAll") }}</RouterLink>
+      <RouterLink :to="{ name: ROUTE_NAMES.catalog }" class="micro-label text-accent inline-flex min-h-11 items-center border-b border-accent/40 hover:border-accent">{{
+        t("home.viewAll")
+      }}</RouterLink>
     </div>
     <div class="mb-6 min-h-10">
       <CategoryChips v-if="catalog.categories.length > 0" :categories="catalog.categories" selected="" @select="openCategory" />
@@ -104,7 +106,12 @@ function openCategory(slug: string): void {
     <SkeletonGrid v-if="!loaded" :count="HOME_FEATURED_LIMIT" featured />
     <div v-else-if="catalog.featured.length > 0" :class="PRODUCT_GRID_CLASS" data-testid="featured-grid">
       <div v-if="heroProduct && gridProducts.length === 0" class="col-span-2 lg:col-span-1"><ProductCard :product="heroProduct" eager /></div>
-      <div v-for="(product, position) in gridProducts" :key="product.id" v-reveal="position" :class="[position === 0 ? FEATURED_CELL_CLASS : '', position < HERO_PICK_COUNT ? 'max-lg:hidden' : '']">
+      <div
+        v-for="(product, position) in gridProducts"
+        :key="product.id"
+        v-reveal="position"
+        :class="[position === 0 ? FEATURED_CELL_CLASS : '', position < HERO_PICK_COUNT ? 'max-lg:hidden' : '']"
+      >
         <ProductCard :product="product" :featured="position === 0" :eager="position < EAGER_CARD_COUNT" />
       </div>
       <RouterLink
@@ -116,7 +123,14 @@ function openCategory(slug: string): void {
         <span class="micro-label text-black/70">{{ t("brand.name") }}</span>
         <span class="flex items-end justify-between gap-3">
           <span class="font-display-tight text-3xl font-extrabold leading-[0.95]">{{ t("home.viewAllTile") }}</span>
-          <svg class="size-8 shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <svg
+            class="size-8 shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            aria-hidden="true"
+          >
             <path d="M4 12h16m-6-6 6 6-6 6" />
           </svg>
         </span>

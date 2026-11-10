@@ -9,16 +9,13 @@ As imagens da demonstração pública são fotos de licença livre, baixadas e a
 | px-8532616.jpg | https://www.pexels.com/photo/8532616/ | Hanna Pad (Anna Nekrashevich) | Pexels License, https://www.pexels.com/license/ |
 | px-8532638.jpg | https://www.pexels.com/photo/8532638/ | Hanna Pad (Anna Nekrashevich) | Pexels License |
 | px-9869075.jpg | https://www.pexels.com/photo/9869075/ | Brando.ltd | Pexels License |
-| px-15947118.jpg | https://www.pexels.com/photo/15947118/ | COPPERTIST WU | Pexels License |
-| px-15862154.jpg | https://www.pexels.com/photo/15862154/ | COPPERTIST WU | Pexels License |
 | px-8490249.jpg | https://www.pexels.com/photo/8490249/ | PNW Production | Pexels License |
 | px-4065170.jpg | https://www.pexels.com/photo/4065170/ | cottonbro studio | Pexels License |
 | px-6373756.jpg | https://www.pexels.com/photo/6373756/ | Monstera Production | Pexels License |
-| cap-commons.jpg | https://commons.wikimedia.org/wiki/File:Baseball_cap.jpg | TexasRebel | Domínio público |
 | car-p408.jpg | https://commons.wikimedia.org/wiki/File:Chrysler_300C_sedan_2008_Pacific_Motorway_Queensport_P1000408.jpg | John Robert McPherson | CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/ |
 | car-dc.jpg | https://commons.wikimedia.org/wiki/File:Chrysler_300C_(LX)_Washington_DC_Metro_Area,_USA.jpg | OWS Photography | CC BY 4.0, https://creativecommons.org/licenses/by/4.0/ |
 
-Atribuição exigida pela CC BY 4.0: "Chrysler 300C (LX) Washington DC Metro Area, USA" por OWS Photography, licença CC BY 4.0, via Wikimedia Commons. A foto foi recortada, escurecida, dessaturada e usada dentro de arte de pôster e de uma imagem de capa, com texto sobreposto.
+Atribuição exigida pela CC BY 4.0: "Chrysler 300C (LX) Washington DC Metro Area, USA" por OWS Photography, licença CC BY 4.0, via Wikimedia Commons. A foto foi recortada, escurecida, dessaturada e usada dentro da arte do pôster, com texto sobreposto.
 
 ## Imagens finais do produto
 
@@ -26,18 +23,22 @@ Atribuição exigida pela CC BY 4.0: "Chrysler 300C (LX) Washington DC Metro Are
 | --- | --- |
 | tee-asfalto-1, tee-neon-1, tee-garagem-1, tee-rascunho-1 | px-8532616 |
 | tee-asfalto-2, tee-neon-2, tee-garagem-2 | px-8532638 |
-| cap-preto-1, cap-verde-1 | cap-commons |
+| cap-preto-1, cap-preto-2, cap-verde-1 | renderização própria, sem foto de origem |
 | adesivo-kit-1, adesivo-kit-2, adesivo-vidro-1 | px-9869075 |
-| chaveiro-roda-1 | px-15947118 |
-| chaveiro-dourado-1 | px-15862154 |
+| chaveiro-roda-1, chaveiro-dourado-1 | renderização própria, sem foto de origem |
 | poster-noite-1 | px-8490249 + car-dc |
 | poster-noite-2 | px-4065170 + car-dc |
 | poster-pista-1 | px-6373756 + car-p408 |
 | poster-pista-2 | px-8490249 + car-p408 |
-| hero-300c (não semeada, disponível para a capa) | car-dc |
 
-## Renderizações próprias sobre foto livre
+## Renderizações próprias
 
-Camisetas, bonés, cartelas de adesivos e pôsteres são montagens: a foto livre é a base e a estampa foi aplicada por cima com mistura (multiplicação nos adesivos e pôsteres, estampa suavizada nas peças de tecido), e as camisetas "Neon Cinza" e "Garagem Vermelha" tiveram a cor da peça alterada por software. A marca "300c.dub" (fonte Barlow Condensed, SIL OFL 1.1, de Jeremy Tribby) e as silhuetas de sedã são arte original deste projeto, sem logotipos de terceiros. Os dois chaveiros (px-15947118 e px-15862154) são as fotos originais, apenas recortadas.
+Bonés e chaveiros são renderizações vetoriais originais deste projeto (`seed/compose-dark.mjs`), sobre fundo escuro gerado por código, sem foto de terceiros. A marca "300c.dub" usa a fonte Barlow Condensed (SIL OFL 1.1, de Jeremy Tribby) e as silhuetas de sedã são arte original, sem logotipos de terceiros.
 
-Licença derivada: cada montagem continua sujeita à licença da foto de origem (Pexels License, CC0, domínio público ou CC BY 4.0 com a atribuição acima). A arte própria sobreposta não adiciona restrições e está disponível sob os mesmos termos da foto de base.
+Camisetas, cartelas de adesivos e pôsteres são montagens: a foto livre é a base e a estampa foi aplicada por cima com mistura (multiplicação nos adesivos e pôsteres, estampa suavizada nas peças de tecido), e as camisetas "Neon Cinza" e "Garagem Vermelha" tiveram a cor da peça alterada por software.
+
+Licença derivada: cada montagem continua sujeita à licença da foto de origem (Pexels License, CC0 ou CC BY 4.0 com a atribuição acima). A arte própria sobreposta, e as renderizações sem foto, não adicionam restrições e estão disponíveis sob os mesmos termos da foto de base.
+
+## Foto da capa
+
+A foto principal da página inicial (main-img) foi fornecida por 300c.dub.

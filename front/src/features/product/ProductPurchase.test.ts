@@ -40,4 +40,22 @@ describe("ProductPurchase", () => {
     expect(cta.attributes("disabled")).toBeDefined();
     expect(cta.text()).toBe("Esgotado");
   });
+
+  it("shows a muted disabled call to action with the hint and focuses the first available size without scrolling", async () => {
+    const { wrapper } = mountWithApp(ProductPurchase, { props: { product: makeProduct() }, attachTo: document.body });
+    const cta = wrapper.get('[data-testid="want-this"]');
+    expect(cta.attributes("disabled")).toBeDefined();
+    expect(cta.classes()).toEqual(expect.arrayContaining(["disabled:bg-raised", "disabled:text-muted", "disabled:border-edge"]));
+    expect(cta.classes()).not.toContain("disabled:opacity-50");
+    expect(wrapper.text()).toContain("Escolha um tamanho");
+    const first = wrapper.findAll("fieldset button")[0].element;
+    expect(document.activeElement).toBe(first);
+    wrapper.unmount();
+  });
+
+  it("does not focus any size when the product has none", async () => {
+    const { wrapper } = mountWithApp(ProductPurchase, { props: { product: makeProduct({ variants: [] }) }, attachTo: document.body });
+    expect(document.activeElement).toBe(document.body);
+    wrapper.unmount();
+  });
 });

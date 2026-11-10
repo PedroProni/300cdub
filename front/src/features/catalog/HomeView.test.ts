@@ -49,18 +49,27 @@ describe("HomeView", () => {
     vi.mocked(publicApi.products).mockResolvedValue(featured(["a", "b", "c", "d"]));
     const { wrapper } = mountWithApp(HomeView);
     await flushPromises();
-    expect(wrapper.find('[data-testid="hero-backdrop"] img').attributes("alt")).toBe("");
+    const photo = wrapper.find('[data-testid="hero-backdrop"] img');
+    expect(photo.attributes("alt")).toBe("");
+    expect(photo.attributes("srcset")).toMatch(/main-img-540.*540w.*main-img-1080.*1080w/);
+    expect(photo.attributes("sizes")).toContain("100vw");
+    expect(photo.attributes("width")).toBe("1080");
+    expect(photo.attributes("height")).toBe("1440");
+    expect(photo.attributes("fetchpriority")).toBe("high");
+    expect(photo.attributes("loading")).toBe("eager");
+    expect(wrapper.find('[data-testid="hero-image"] img').attributes("src")).not.toContain("main-img");
     const picks = wrapper.findAll('[data-testid="hero-picks"] li');
     expect(picks.map((item) => item.find("a").attributes("href"))).toEqual(["/produto/b", "/produto/c"]);
     const cells = wrapper.find('[data-testid="featured-grid"]').findAll(":scope > div");
     expect(cells.map((cell) => cell.classes().includes("max-lg:hidden"))).toEqual([true, true, false]);
   });
 
-  it("falls back to the static hero photo and the empty state without featured products", async () => {
+  it("keeps the hero photo in the backdrop only and shows the empty state without featured products", async () => {
     vi.mocked(publicApi.products).mockResolvedValue(featured([]));
     const { wrapper } = mountWithApp(HomeView);
     await flushPromises();
-    expect(wrapper.find('[data-testid="hero-image"] img').attributes("alt")).toBe("");
+    expect(wrapper.find('[data-testid="hero-image"] img').exists()).toBe(false);
+    expect(wrapper.find('[data-testid="hero-backdrop"] img').exists()).toBe(true);
     expect(wrapper.find('[data-testid="featured-grid"]').exists()).toBe(false);
   });
 });

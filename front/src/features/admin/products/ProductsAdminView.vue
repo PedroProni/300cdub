@@ -79,9 +79,11 @@ onMounted(async () => {
     </div>
     <SkeletonList v-if="store.loading" :count="5" />
     <EmptyState v-else-if="store.items.length === 0 && !loadError" :title="t('admin.products.empty.title')" :description="t('admin.products.empty.description')">
-      <RouterLink :to="{ name: ROUTE_NAMES.adminProductNew }" class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-sm font-bold text-black">{{
-        t("admin.products.new")
-      }}</RouterLink>
+      <RouterLink
+        :to="{ name: ROUTE_NAMES.adminProductNew }"
+        class="font-display-tight inline-flex min-h-11 items-center rounded-sm bg-accent-fill px-5 text-sm font-bold text-black"
+        >{{ t("admin.products.new") }}</RouterLink
+      >
     </EmptyState>
     <p v-else-if="visibleItems.length === 0 && !loadError" class="text-sm text-muted">{{ t("admin.products.noResults") }}</p>
     <ul ref="list" class="flex flex-col gap-3">
@@ -103,7 +105,7 @@ onMounted(async () => {
             <PriceTag :price="product.price" :promo-price="product.promoPrice" /><StockBadge :status="product.stockStatus" />
           </div>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
+        <div class="flex w-full flex-wrap items-center gap-x-6 gap-y-1 border-t border-edge pt-3 xl:w-auto xl:border-t-0 xl:pt-0" data-testid="product-controls">
           <BaseSwitch
             :model-value="product.visible"
             :label="t('admin.products.visible')"
@@ -114,20 +116,22 @@ onMounted(async () => {
             :label="t('admin.products.featured')"
             @update:model-value="guarded(() => store.toggle(product, 'featured'), 'admin.products.saved')"
           />
-          <RouterLink
-            :to="{ name: ROUTE_NAMES.adminProductEdit, params: { id: product.id } }"
-            class="flex size-11 items-center justify-center rounded-sm text-steel hover:bg-raised"
-            :aria-label="t('common.edit')"
-            ><Pencil class="size-5" aria-hidden="true"
-          /></RouterLink>
-          <button
-            type="button"
-            class="flex size-11 items-center justify-center rounded-sm text-danger hover:bg-danger/15"
-            :aria-label="t('common.delete')"
-            @click="remove(product)"
-          >
-            <Trash2 class="size-5" aria-hidden="true" />
-          </button>
+          <div class="ml-auto flex items-center gap-1 xl:ml-0">
+            <RouterLink
+              :to="{ name: ROUTE_NAMES.adminProductEdit, params: { id: product.id } }"
+              class="flex size-11 items-center justify-center rounded-sm text-steel hover:bg-raised"
+              :aria-label="t('common.edit')"
+              ><Pencil class="size-5" aria-hidden="true"
+            /></RouterLink>
+            <button
+              type="button"
+              class="flex size-11 items-center justify-center rounded-sm text-danger hover:bg-danger/15"
+              :aria-label="t('common.delete')"
+              @click="remove(product)"
+            >
+              <Trash2 class="size-5" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </li>
     </ul>

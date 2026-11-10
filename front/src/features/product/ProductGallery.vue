@@ -45,7 +45,7 @@ function onScroll(): void {
 
 <template>
   <div class="flex flex-col gap-3 lg:flex-row-reverse">
-    <div class="relative aspect-[4/5] w-full overflow-hidden border border-edge bg-raised lg:max-h-[80vh] lg:flex-1">
+    <div class="relative aspect-[4/5] w-full overflow-hidden border border-edge bg-raised max-h-[70vh] lg:flex-1">
       <div v-if="count > 0" ref="track" class="gallery-track size-full touch-pan-x" data-testid="gallery-track" @scroll.passive="onScroll">
         <div v-for="(image, position) in props.images" :key="image.id" class="gallery-slide size-full" data-testid="gallery-slide">
           <ResponsiveImage

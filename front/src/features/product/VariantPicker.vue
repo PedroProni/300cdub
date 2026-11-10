@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import type { VariantPickerProps } from "@/features/product/product-view.types";
 
 const props = defineProps<VariantPickerProps>();
 const model = defineModel<string | null>({ required: true });
 const { t } = useI18n();
+const root = ref<HTMLElement | null>(null);
+
+onMounted(() => root.value?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true }));
 </script>
 
 <template>
-  <fieldset class="flex flex-col gap-2">
+  <fieldset ref="root" class="flex flex-col gap-2">
     <legend class="micro-label">{{ t("product.sizeLabel") }}</legend>
     <div class="flex flex-wrap gap-2">
       <button

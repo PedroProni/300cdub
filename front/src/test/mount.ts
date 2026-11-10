@@ -21,6 +21,8 @@ export function createTestRouter() {
       { path: ROUTE_PATHS.contact, name: ROUTE_NAMES.contact, component: Stub },
       { path: ROUTE_PATHS.login, name: ROUTE_NAMES.login, component: Stub },
       { path: ROUTE_PATHS.adminProducts, name: ROUTE_NAMES.adminProducts, component: Stub },
+      { path: ROUTE_PATHS.adminProductNew, name: ROUTE_NAMES.adminProductNew, component: Stub },
+      { path: ROUTE_PATHS.adminProductEdit, name: ROUTE_NAMES.adminProductEdit, component: Stub },
     ],
   });
 }
