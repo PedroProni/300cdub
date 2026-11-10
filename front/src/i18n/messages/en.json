@@ -69,7 +69,7 @@
     "searchPlaceholder": "Product name",
     "sortLabel": "Sort by",
     "sort": {
-      "manual": "Store picks",
+      "manual": "Featured",
       "newest": "Newest",
       "priceAsc": "Lowest price",
       "priceDesc": "Highest price"
