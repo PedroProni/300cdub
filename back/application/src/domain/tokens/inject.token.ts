@@ -1,1 +1,0 @@
-export const PRODUCT_INJECT_TOKEN = Symbol('PRODUCT_INJECT_TOKEN');

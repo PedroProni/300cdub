@@ -1,11 +1,65 @@
+name: 300cdub
+
 services:
-  300cdub-api: # Change to application name
-    build:
-      context: ./application
-    container_name: 300cdub-api # Change to application name
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./application/.env
-    command: node dist/main.js
+  mongo:
+    image: mongo:7
     restart: unless-stopped
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  minio:
+    image: chainguard/minio:latest
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY_ID:-cdubminio}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_ACCESS_KEY:-cdubminio-secret}
+    ports:
+      - "${MINIO_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio-data:/data
+
+  api:
+    build:
+      context: ./back/application
+    restart: unless-stopped
+    depends_on:
+      - mongo
+      - minio
+    ports:
+      - "${API_PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo:27017/cdub
+      JWT_SECRET: ${JWT_SECRET:-local-dev-secret-change-me-0123456789abcdef}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@300cdub.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-ChangeMe-12345}
+      ALLOWED_ORIGINS: http://localhost:${WEB_PORT:-8080}
+      PUBLIC_SITE_URL: http://localhost:${WEB_PORT:-8080}
+      COOKIE_SECURE: "false"
+      S3_ENDPOINT: http://minio:9000
+      S3_REGION: auto
+      S3_BUCKET: ${S3_BUCKET:-cdub-images}
+      S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID:-cdubminio}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY:-cdubminio-secret}
+      S3_FORCE_PATH_STYLE: "true"
+      S3_PUBLIC_BASE_URL: http://localhost:${MINIO_PORT:-9000}/${S3_BUCKET:-cdub-images}
+
+  web:
+    build:
+      context: ./front
+      args:
+        VITE_API_URL: http://localhost:${API_PORT:-3000}/api
+        VITE_API_PUBLIC_ORIGIN: http://localhost:${API_PORT:-3000}
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "${WEB_PORT:-8080}:80"
+
+volumes:
+  mongo-data:
+  minio-data:
