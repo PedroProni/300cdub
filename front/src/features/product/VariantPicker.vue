@@ -8,7 +8,10 @@ const model = defineModel<string | null>({ required: true });
 const { t } = useI18n();
 const root = ref<HTMLElement | null>(null);
 
-onMounted(() => root.value?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true }));
+onMounted(() => {
+  if (props.variants.length < 2) return;
+  root.value?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true });
+});
 </script>
 
 <template>

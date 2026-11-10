@@ -88,6 +88,7 @@
   },
   "product": {
     "sizeLabel": "Size",
+    "sizeSingle": "Size: {size}",
     "sizeSoldOut": "Sold out in this size",
     "discount": "{percent}% OFF",
     "share": "Share",
@@ -176,6 +177,7 @@
       "editTitle": "Edit product",
       "back": "Back to the list",
       "search": "Search product",
+      "searchPlaceholder": "Type the product name",
       "noResults": "No product with that name.",
       "reorderDisabled": "Clear the search to change the product order.",
       "visible": "Visible in the showroom",

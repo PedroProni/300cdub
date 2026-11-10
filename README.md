@@ -30,6 +30,10 @@ Default local admin: `admin@300cdub.local` / `ChangeMe-12345` (override with `AD
 
 Product links shared as `<api>/p/<slug>` show title, price and cover in WhatsApp and Instagram previews and send people to the web app.
 
+## Languages
+
+The UI strings are translated into Brazilian Portuguese (default) and English. Category names and product descriptions are owner data: they are shown as entered, in both languages, because there are no English fields.
+
 ## Standards
 
 No comments in code, one context per file, imports on one line, no hardcoded UI text (PT-BR and EN files with a parity test), no em dash anywhere.

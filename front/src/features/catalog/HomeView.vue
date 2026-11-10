@@ -83,7 +83,7 @@ function openCategory(slug: string): void {
     </div>
   </div>
 
-  <div class="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-edge bg-panel py-3" aria-hidden="true" data-testid="marquee">
+  <div class="marquee-mask relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-edge bg-panel py-3" aria-hidden="true" data-testid="marquee">
     <div class="marquee-track">
       <ul v-for="copy in MARQUEE_COPIES" :key="copy" class="flex shrink-0 items-center">
         <li v-for="key in HOME_MARQUEE_KEYS" :key="key" class="font-display-tight flex items-center gap-6 pr-6 text-4xl font-bold leading-none text-steel">

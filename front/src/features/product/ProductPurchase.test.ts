@@ -58,4 +58,39 @@ describe("ProductPurchase", () => {
     expect(document.activeElement).toBe(document.body);
     wrapper.unmount();
   });
+
+  it("selects the only variant at once, shows a read-only label and keeps the size in the contact link", async () => {
+    const product = makeProduct({ variants: [{ id: "u", label: "Único", stock: 4 }] });
+    const { wrapper, router } = mountWithApp(ProductPurchase, { props: { product }, attachTo: document.body });
+    expect(wrapper.find("fieldset").exists()).toBe(false);
+    expect(wrapper.get('[data-testid="single-variant"]').text()).toBe("Tamanho: Único");
+    expect(wrapper.get('[data-testid="want-this"]').attributes("disabled")).toBeUndefined();
+    expect(wrapper.text()).not.toContain("Escolha um tamanho");
+    expect(document.activeElement).toBe(document.body);
+    await wrapper.get('[data-testid="want-this"]').trigger("click");
+    await router.isReady();
+    await new Promise((resolve) => setTimeout(resolve));
+    expect(decodeURIComponent(router.currentRoute.value.fullPath)).toBe("/produto/camiseta-300c/contato?size=Único");
+    wrapper.unmount();
+  });
+
+  it("keeps a single variant without stock disabled", () => {
+    const product = makeProduct({ variants: [{ id: "u", label: "Único", stock: 0 }] });
+    const { wrapper } = mountWithApp(ProductPurchase, { props: { product } });
+    expect(wrapper.get('[data-testid="want-this"]').attributes("disabled")).toBeDefined();
+  });
+
+  it("keeps several sizes disabled until one is chosen", async () => {
+    const product = makeProduct({
+      variants: [
+        { id: "a", label: "P", stock: 2 },
+        { id: "b", label: "M", stock: 2 },
+      ],
+    });
+    const { wrapper } = mountWithApp(ProductPurchase, { props: { product } });
+    expect(wrapper.get('[data-testid="want-this"]').attributes("disabled")).toBeDefined();
+    expect(wrapper.find('[data-testid="single-variant"]').exists()).toBe(false);
+    await wrapper.findAll("fieldset button")[1].trigger("click");
+    expect(wrapper.get('[data-testid="want-this"]').attributes("disabled")).toBeUndefined();
+  });
 });

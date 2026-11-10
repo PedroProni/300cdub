@@ -74,7 +74,13 @@ onMounted(async () => {
     </div>
     <div v-if="store.items.length > 0" class="flex flex-col gap-1.5">
       <label for="admin-product-search" class="micro-label">{{ t("admin.products.search") }}</label>
-      <input id="admin-product-search" v-model="query" type="search" class="min-h-11 rounded-sm border border-edge bg-ink px-3 text-base text-steel" />
+      <input
+        id="admin-product-search"
+        v-model="query"
+        type="search"
+        :placeholder="t('admin.products.searchPlaceholder')"
+        class="min-h-11 rounded-sm border border-edge bg-ink px-3 text-base text-steel"
+      />
       <p v-if="filtering" class="text-xs text-muted">{{ t("admin.products.reorderDisabled") }}</p>
     </div>
     <SkeletonList v-if="store.loading" :count="5" />

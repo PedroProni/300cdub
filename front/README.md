@@ -80,3 +80,7 @@ Multi stage build: Node builds `dist/`, nginx serves it with a fallback to `inde
 ## Translations
 
 Every visible string comes from `src/i18n/messages/pt.json` and `en.json`. `src/i18n/i18n-parity.test.ts` fails when the key sets differ, a value is empty, placeholders differ, a message does not compile, a key used by `t()` is missing, or an em dash appears. `src/i18n/no-hardcoded-text.test.ts` fails when a template contains literal text or a literal `placeholder`, `title`, `aria-label`, `alt` or `label`.
+
+`src/i18n/i18n-typos.test.ts` also fails when `pt.json` contains truncated or unaccented common words (for example "velocidad" or "potencia", listed in `i18n-typos.constants.ts`) or English-only words.
+
+Owner data is not translated: category names and product descriptions are shown exactly as entered in the backoffice, in both languages (there are no English fields). Only the UI strings are translated into PT-BR and EN.

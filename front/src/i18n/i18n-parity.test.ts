@@ -98,6 +98,13 @@ describe("i18n parity", () => {
     }
   });
 
+  it("covers the admin search placeholder and the single variant label", () => {
+    for (const key of ["admin.products.searchPlaceholder", "product.sizeSingle"]) {
+      expect(flatPt[key], key).toBeTruthy();
+      expect(flatEn[key], key).toBeTruthy();
+    }
+  });
+
   it("maps every api error code and status to existing keys", () => {
     for (const key of [...Object.values(ERROR_CODE_KEYS), ...Object.values(ERROR_STATUS_KEYS)]) {
       expect(flatPt[key], key).toBeTruthy();

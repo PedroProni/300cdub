@@ -88,6 +88,7 @@
   },
   "product": {
     "sizeLabel": "Tamanho",
+    "sizeSingle": "Tamanho: {size}",
     "sizeSoldOut": "Esgotado neste tamanho",
     "discount": "{percent}% OFF",
     "share": "Compartilhar",
@@ -176,6 +177,7 @@
       "editTitle": "Editar produto",
       "back": "Voltar para a lista",
       "search": "Buscar produto",
+      "searchPlaceholder": "Digite o nome do produto",
       "noResults": "Nenhum produto com esse nome.",
       "reorderDisabled": "Limpe a busca para mudar a ordem dos produtos.",
       "visible": "Visível na vitrine",
