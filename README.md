@@ -37,3 +37,11 @@ The UI strings are translated into Brazilian Portuguese (default) and English. C
 ## Standards
 
 No comments in code, one context per file, imports on one line, no hardcoded UI text (PT-BR and EN files with a parity test), no em dash anywhere.
+
+## CI/CD
+
+Pull requests to `main` run `ci.yml`: `back` (unit tests, build), `front` (lint, typecheck, tests, build) and `e2e` (the API end-to-end suite against MongoDB and MinIO containers). The `ci` job is the required status check of `main`: a pull request cannot be merged until it passes.
+
+Every push to `main` that touches `back/**` runs `sync-demo-host.yml`: it applies that exact commit's change to the vendored copy in the private `PedroProni/orbit-demo-host` repository (`cdub/api`) and opens a `sync/300cdub-<sha>` pull request there. The demo host runs its own tests and image build, merges the pull request by itself when they pass, waits for the Render deploy of the commit and then runs a smoke test against production. If the change cannot be applied (for example it conflicts with a demo-only patch) the job opens an issue in this repository. Needs the repository secret `DEMO_HOST_TOKEN` (fine-grained token limited to `orbit-demo-host`).
+
+Every push to `main` that touches `front/**` runs `deploy-pages.yml`: it builds, publishes with `wrangler pages deploy` to the `proni-cdub-demo` Cloudflare Pages project (branch `main`), then fetches the served page until it is byte-identical to the build and checks that the latest Pages deployment carries the pushed commit. Needs the repository secrets `CLOUDFLARE_API_TOKEN` (Pages edit only) and `CLOUDFLARE_ACCOUNT_ID`.
