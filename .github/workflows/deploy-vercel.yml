@@ -27,6 +27,13 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22
+      - name: Definir o autor do commit aceito pela Vercel
+        env:
+          VERCEL_COMMIT_EMAIL: ${{ secrets.VERCEL_COMMIT_EMAIL }}
+        run: |
+          git config user.email "$VERCEL_COMMIT_EMAIL"
+          git config user.name "deploy"
+          git commit --amend --reset-author --no-edit --allow-empty
       - name: Publicar
         id: deploy
         working-directory: front
