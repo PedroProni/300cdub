@@ -1,0 +1,47 @@
+name: Publicar na Vercel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'front/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-vercel
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_CDUB_DEMO }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - name: Publicar
+        id: deploy
+        working-directory: front
+        run: |
+          URL=$(npx --yes vercel@latest deploy --prod --yes --meta githubCommitSha="$GITHUB_SHA")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Conferir o conteúdo publicado
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          EXPECTED=$(curl -fsS "$DEPLOY_URL/" | sha256sum | cut -d' ' -f1)
+          for I in $(seq 1 30); do
+            REMOTE=$(curl -fsS "https://cdub-demo.proni.dev/?ci=$GITHUB_SHA" | sha256sum | cut -d' ' -f1)
+            if [ "$EXPECTED" = "$REMOTE" ]; then echo "conteúdo publicado confere"; exit 0; fi
+            sleep 6
+          done
+          echo "conteúdo publicado diferente do deploy"
+          exit 1
