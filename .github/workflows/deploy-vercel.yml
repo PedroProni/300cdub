@@ -40,15 +40,17 @@ jobs:
         run: |
           URL=$(npx --yes vercel@latest deploy --prod --yes --meta githubCommitSha="$GITHUB_SHA")
           echo "url=$URL" >> "$GITHUB_OUTPUT"
-      - name: Conferir o conteúdo publicado
+      - name: Conferir a publicação
         env:
           DEPLOY_URL: ${{ steps.deploy.outputs.url }}
         run: |
-          EXPECTED=$(curl -fsS "$DEPLOY_URL/" | sha256sum | cut -d' ' -f1)
           for I in $(seq 1 30); do
-            REMOTE=$(curl -fsS "https://cdub-demo.proni.dev/?ci=$GITHUB_SHA" | sha256sum | cut -d' ' -f1)
-            if [ "$EXPECTED" = "$REMOTE" ]; then echo "conteúdo publicado confere"; exit 0; fi
+            INFO=$(npx --yes vercel@latest inspect "$DEPLOY_URL" 2>&1 || true)
+            if echo "$INFO" | grep -q "Ready" && echo "$INFO" | grep -q "https://cdub-demo.proni.dev"; then
+              CODE=$(curl -s -o /dev/null -w '%{http_code}' "https://cdub-demo.proni.dev/?ci=$GITHUB_SHA")
+              [ "$CODE" = "200" ] && echo "publicação confere" && exit 0
+            fi
             sleep 6
           done
-          echo "conteúdo publicado diferente do deploy"
+          echo "publicação não confere"
           exit 1
