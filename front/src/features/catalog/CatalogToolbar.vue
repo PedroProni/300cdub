@@ -34,7 +34,7 @@ const options = computed(() => SORT_OPTIONS.map((option) => ({ value: option.val
         v-model="text"
         type="search"
         :placeholder="t('catalog.searchPlaceholder')"
-        class="w-full min-h-11 rounded-sm border border-edge bg-ink px-3 text-sm text-steel placeholder:text-muted/60"
+        class="h-11 w-full appearance-none rounded-sm border border-edge bg-ink px-3 text-sm text-steel placeholder:text-muted/60"
       />
     </div>
     <BaseSelect v-model="sortModel" :label="t('catalog.sortLabel')" :options="options" />
