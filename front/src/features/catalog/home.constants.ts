@@ -11,5 +11,3 @@ export const HERO_PHOTO_WIDTH = 1080;
 export const HERO_PHOTO_HEIGHT = 1440;
 
 export const HERO_PHOTO_SIZES = "(min-width: 1024px) 60vw, 100vw";
-
-export const HERO_PICK_COUNT = 2;

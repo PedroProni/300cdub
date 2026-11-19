@@ -18,7 +18,7 @@ const sizes = computed(() => (props.featured ? FEATURED_CARD_SIZES : PRODUCT_CAR
 
 <template>
   <RouterLink :to="{ name: ROUTE_NAMES.product, params: { slug: props.product.slug } }" class="group flex h-full flex-col border border-edge bg-panel transition-colors duration-300 hover:border-accent/60 focus-visible:border-accent" data-testid="product-card">
-    <div class="relative overflow-hidden bg-raised" :class="props.featured ? 'aspect-[16/11] lg:aspect-auto lg:min-h-0 lg:flex-1' : 'aspect-[4/5]'">
+    <div class="relative overflow-hidden bg-raised" :class="props.featured ? 'aspect-[4/5] lg:aspect-auto lg:min-h-0 lg:flex-1' : 'aspect-[4/5]'">
       <div class="absolute inset-0">
         <ResponsiveImage v-if="cover" :urls="cover" :alt="props.product.name" :sizes="sizes" :eager="props.eager" :priority="props.priority" :img-class="imageClass" />
         <div v-else class="micro-label flex size-full items-center justify-center">{{ t("catalog.noImage") }}</div>

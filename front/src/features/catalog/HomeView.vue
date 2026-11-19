@@ -2,8 +2,6 @@
 import { computed, onMounted, ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import PriceTag from "@/components/ui/PriceTag.vue";
-import ResponsiveImage from "@/components/ui/ResponsiveImage.vue";
 import EmptyState from "@/components/ui/EmptyState.vue";
 import SkeletonGrid from "@/components/ui/SkeletonGrid.vue";
 import { FEATURED_CELL_CLASS, PRODUCT_GRID_CLASS } from "@/components/ui/ui.constants";
@@ -13,7 +11,7 @@ import HeroImage from "@/features/catalog/HeroImage.vue";
 import ProductCard from "@/features/catalog/ProductCard.vue";
 import { useCatalogStore } from "@/features/catalog/catalog.store";
 import { EAGER_CARD_COUNT, HOME_FEATURED_LIMIT } from "@/features/catalog/catalog.constants";
-import { HERO_LINE_KEYS, HERO_PICK_COUNT, HOME_MARQUEE_KEYS, MARQUEE_COPIES } from "@/features/catalog/home.constants";
+import { HERO_LINE_KEYS, HOME_MARQUEE_KEYS, MARQUEE_COPIES } from "@/features/catalog/home.constants";
 import { useHead } from "@/composables/useHead";
 import { vReveal } from "@/directives/reveal.directive";
 import { ROUTE_NAMES } from "@/router/routes.constants";
@@ -24,7 +22,6 @@ const router = useRouter();
 const loaded = ref(false);
 const heroProduct = computed(() => catalog.featured[0] ?? null);
 const gridProducts = computed(() => catalog.featured.slice(1));
-const heroPicks = computed(() => gridProducts.value.slice(0, HERO_PICK_COUNT));
 
 useHead({ title: () => t("home.metaTitle"), description: () => t("home.metaDescription") });
 
@@ -67,19 +64,6 @@ function openCategory(slug: string): void {
         </div>
         <div class="hero-fade lg:col-span-5 lg:w-72 lg:justify-self-end lg:self-start" style="--line: 3"><HeroImage :product="heroProduct" :loaded="loaded" /></div>
       </section>
-      <ul v-if="heroPicks.length > 0" class="grid grid-cols-2 gap-3 pb-8 lg:hidden" data-testid="hero-picks">
-        <li v-for="product in heroPicks" :key="product.id">
-          <RouterLink :to="{ name: ROUTE_NAMES.product, params: { slug: product.slug } }" class="group flex flex-col border border-edge bg-panel/90">
-            <span class="relative block aspect-square overflow-hidden bg-raised">
-              <ResponsiveImage v-if="product.images[0]" :urls="product.images[0].urls" :alt="product.name" sizes="50vw" img-class="card-photo" />
-            </span>
-            <span class="flex flex-col gap-1 border-t border-edge p-2">
-              <span class="font-display-tight line-clamp-1 text-lg font-semibold leading-none text-steel">{{ product.name }}</span>
-              <PriceTag :price="product.price" :promo-price="product.promoPrice" />
-            </span>
-          </RouterLink>
-        </li>
-      </ul>
     </div>
   </div>
 
@@ -110,7 +94,7 @@ function openCategory(slug: string): void {
         v-for="(product, position) in gridProducts"
         :key="product.id"
         v-reveal="position"
-        :class="[position === 0 ? FEATURED_CELL_CLASS : '', position < HERO_PICK_COUNT ? 'max-lg:hidden' : '']"
+        :class="position === 0 ? FEATURED_CELL_CLASS : ''"
       >
         <ProductCard :product="product" :featured="position === 0" :eager="position < EAGER_CARD_COUNT" />
       </div>
@@ -122,9 +106,9 @@ function openCategory(slug: string): void {
       >
         <span class="micro-label text-black/70">{{ t("brand.name") }}</span>
         <span class="flex items-end justify-between gap-3">
-          <span class="font-display-tight text-3xl font-extrabold leading-[0.95]">{{ t("home.viewAllTile") }}</span>
+          <span class="font-display-tight text-2xl font-extrabold leading-[0.95] sm:text-3xl">{{ t("home.viewAllTile") }}</span>
           <svg
-            class="size-8 shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+            class="size-6 shrink-0 transition-transform sm:size-8 duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

@@ -45,7 +45,7 @@ describe("HomeView", () => {
     expect(grid.find("a[href='/produto/b']").exists()).toBe(true);
   });
 
-  it("shows the hero backdrop and a mobile row with the next two products, hidden from the mobile grid", async () => {
+  it("shows the hero backdrop and keeps every featured product in the featured grid on every screen", async () => {
     vi.mocked(publicApi.products).mockResolvedValue(featured(["a", "b", "c", "d"]));
     const { wrapper } = mountWithApp(HomeView);
     await flushPromises();
@@ -58,10 +58,10 @@ describe("HomeView", () => {
     expect(photo.attributes("fetchpriority")).toBe("high");
     expect(photo.attributes("loading")).toBe("eager");
     expect(wrapper.find('[data-testid="hero-image"] img').attributes("src")).not.toContain("main-img");
-    const picks = wrapper.findAll('[data-testid="hero-picks"] li');
-    expect(picks.map((item) => item.find("a").attributes("href"))).toEqual(["/produto/b", "/produto/c"]);
+    expect(wrapper.find('[data-testid="hero"] a[href="/produto/b"]').exists()).toBe(false);
     const cells = wrapper.find('[data-testid="featured-grid"]').findAll(":scope > div");
-    expect(cells.map((cell) => cell.classes().includes("max-lg:hidden"))).toEqual([true, true, false]);
+    expect(cells.map((cell) => cell.find("a").attributes("href"))).toEqual(["/produto/b", "/produto/c", "/produto/d"]);
+    expect(cells.some((cell) => cell.classes().includes("max-lg:hidden"))).toBe(false);
   });
 
   it("keeps the hero photo in the backdrop only and shows the empty state without featured products", async () => {
